@@ -1,6 +1,6 @@
 // Jernlog offline: appen vises fra cachen med det samme og opdateres i baggrunden.
 // Ret VERSION ved hver udgivelse, så gamle filer ryddes op.
-const VERSION = 'jernlog-1';
+const VERSION = 'jernlog-2';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
 self.addEventListener('install', e => {

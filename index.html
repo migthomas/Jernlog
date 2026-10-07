@@ -247,7 +247,7 @@ p{margin:0}
 var KEY='jernlog:v1';
 var DAYS=['Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag','Søndag'];
 var PRESETS=[60,90,120,180,300];
-/* Push: bryst, skuldre, triceps (skubber væk fra kroppen). Pull: ryg, bagskulder, biceps (trækker mod kroppen). Ben: lår, baller, hasser, lægge. */
+/* Push: bryst, skuldre, triceps (skubber væk fra kroppen). Pull: ryg, bagskulder, biceps (trækker mod kroppen). Core + Ben: lår, baller, hasser, lægge og mave/core (kabel, maskiner og bænk bruges også her). */
 /* Øvelseskatalog: [navn, gruppe, ikon, [min reps, max reps, vægttrin], muskler (1 = primær, .5 = hjælpemuskel), godt sammen med]
    "Godt sammen med" er øvelser der rammer musklen fra en anden vinkel, eller modsatte muskel (fx triceps <-> biceps). */
 var CATALOG=[
@@ -282,25 +282,29 @@ var CATALOG=[
   ['Preacher curl','Pull','curl',[8,12,2.5],{Biceps:1},['Hammer curl','Kabel curl','Skullcrushers']],
   ['Kabel curl','Pull','curl',[10,15,2.5],{Biceps:1},['Hammer curl','Preacher curl','Triceps pushdown']],
 
-  ['Squat','Ben','squat',[5,8,2.5],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Leg curl','Lægpres']],
-  ['Front squat','Ben','squat',[5,8,2.5],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Leg curl','Hip thrust']],
-  ['Goblet squat','Ben','squat',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Udfald','Leg curl']],
-  ['Hack squat','Ben','squat',[8,12,5],{'Forlår':1,Baller:.5},['Leg curl','Rumænsk dødløft','Hip thrust']],
-  ['Benpres','Ben','legpress',[10,15,10],{'Forlår':1,Baller:.5},['Leg curl','Rumænsk dødløft','Leg extension']],
-  ['Leg extension','Ben','legext',[10,15,5],{'Forlår':1},['Leg curl','Squat','Hip thrust']],
-  ['Udfald','Ben','lunge',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Hip thrust','Leg curl']],
-  ['Bulgarsk split squat','Ben','lunge',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Hip thrust','Leg curl']],
-  ['Rumænsk dødløft','Ben','rdl',[8,12,5],{'Baglår':1,Baller:.5},['Squat','Leg curl','Hip thrust']],
-  ['Dødløft','Ben','deadlift',[3,6,5],{Baller:1,'Baglår':.5,Ryg:.5},['Front squat','Leg extension','Bulgarsk split squat']],
-  ['Leg curl','Ben','legcurl',[10,15,5],{'Baglår':1},['Leg extension','Rumænsk dødløft','Squat']],
-  ['Hip thrust','Ben','hipthrust',[8,12,5],{Baller:1,'Baglår':.5},['Rumænsk dødløft','Bulgarsk split squat','Leg extension']],
-  ['Lægpres','Ben','calf',[12,20,5],{'Lægge':1},['Siddende lægpres','Leg curl','Squat']],
-  ['Siddende lægpres','Ben','calf',[12,20,5],{'Lægge':1},['Lægpres','Leg extension']],
+  ['Squat','Core + Ben','squat',[5,8,2.5],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Leg curl','Lægpres']],
+  ['Front squat','Core + Ben','squat',[5,8,2.5],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Leg curl','Hip thrust']],
+  ['Goblet squat','Core + Ben','squat',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Udfald','Leg curl']],
+  ['Hack squat','Core + Ben','squat',[8,12,5],{'Forlår':1,Baller:.5},['Leg curl','Rumænsk dødløft','Hip thrust']],
+  ['Benpres','Core + Ben','legpress',[10,15,10],{'Forlår':1,Baller:.5},['Leg curl','Rumænsk dødløft','Leg extension']],
+  ['Leg extension','Core + Ben','legext',[10,15,5],{'Forlår':1},['Leg curl','Squat','Hip thrust']],
+  ['Udfald','Core + Ben','lunge',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Hip thrust','Leg curl']],
+  ['Bulgarsk split squat','Core + Ben','lunge',[8,12,2],{'Forlår':1,Baller:.5},['Rumænsk dødløft','Hip thrust','Leg curl']],
+  ['Rumænsk dødløft','Core + Ben','rdl',[8,12,5],{'Baglår':1,Baller:.5},['Squat','Leg curl','Hip thrust']],
+  ['Dødløft','Core + Ben','deadlift',[3,6,5],{Baller:1,'Baglår':.5,Ryg:.5},['Front squat','Leg extension','Bulgarsk split squat']],
+  ['Leg curl','Core + Ben','legcurl',[10,15,5],{'Baglår':1},['Leg extension','Rumænsk dødløft','Squat']],
+  ['Hip thrust','Core + Ben','hipthrust',[8,12,5],{Baller:1,'Baglår':.5},['Rumænsk dødløft','Bulgarsk split squat','Leg extension']],
+  ['Lægpres','Core + Ben','calf',[12,20,5],{'Lægge':1},['Siddende lægpres','Leg curl','Squat']],
+  ['Siddende lægpres','Core + Ben','calf',[12,20,5],{'Lægge':1},['Lægpres','Leg extension']],
 
-  ['Crunches','Mave','crunch',[12,20,2.5],{Mave:1},['Hængende benløft','Ab wheel']],
-  ['Kabel crunch','Mave','crunch',[10,15,2.5],{Mave:1},['Hængende benløft','Ab wheel']],
-  ['Hængende benløft','Mave','legraise',[8,15,2.5],{Mave:1},['Kabel crunch','Ab wheel']],
-  ['Ab wheel','Mave','abwheel',[6,15,2.5],{Mave:1},['Hængende benløft','Kabel crunch']]
+  ['Crunches','Core + Ben','crunch',[12,20,2.5],{Mave:1},['Sit-ups på skråbænk','Hængende benløft','Ab wheel']],
+  ['Kabel crunch','Core + Ben','crunch',[10,15,2.5],{Mave:1},['Pallof press','Kabel woodchop','Hængende benløft']],
+  ['Hængende benløft','Core + Ben','legraise',[8,15,2.5],{Mave:1},['Kabel crunch','Ab wheel']],
+  ['Ab wheel','Core + Ben','abwheel',[6,15,2.5],{Mave:1},['Hængende benløft','Kabel crunch']],
+  ['Ab crunch maskine','Core + Ben','abmachine',[10,15,5],{Mave:1},['Kabel crunch','Hængende benløft','Pallof press']],
+  ['Pallof press','Core + Ben','pallof',[10,15,2.5],{Mave:1},['Kabel woodchop','Ab wheel','Kabel crunch']],
+  ['Kabel woodchop','Core + Ben','woodchop',[10,15,2.5],{Mave:1},['Pallof press','Kabel crunch','Hængende benløft']],
+  ['Sit-ups på skråbænk','Core + Ben','crunch',[10,20,2.5],{Mave:1},['Hængende benløft','Kabel crunch','Ab wheel']]
 ];
 /* Vejledning: tre trin + typisk fejl. */
 var DESC={
@@ -350,13 +354,17 @@ var DESC={
   'Crunches':[['Lig på ryggen med bøjede knæ og hænderne ved tindingerne.','Rul overkroppen op, til skulderbladene løfter sig fra gulvet.','Sænk langsomt.'],'At trække i nakken med hænderne.'],
   'Kabel crunch':[['Knæl foran kablet med rebet ved hovedet.','Rul overkroppen ned mod knæene ved at spænde maven.','Rul langsomt op igen.'],'At sætte sig tilbage på hælene og trække med armene.'],
   'Hængende benløft':[['Hæng i en stang med strakte arme.','Løft benene op foran dig, og vip bækkenet op.','Sænk langsomt uden at svinge.'],'At svinge. Stop svinget mellem gentagelserne.'],
-  'Ab wheel':[['Knæl med hænderne på hjulet under skuldrene.','Rul langsomt frem med stram mave og ret ryg.','Rul tilbage ved at trække med maven.'],'At svaje i lænden. Rul kun så langt, du kan holde ryggen ret.']
+  'Ab wheel':[['Knæl med hænderne på hjulet under skuldrene.','Rul langsomt frem med stram mave og ret ryg.','Rul tilbage ved at trække med maven.'],'At svaje i lænden. Rul kun så langt, du kan holde ryggen ret.'],
+  'Ab crunch maskine':[['Indstil sædet, så drejepunktet flugter med din navle, og grib håndtagene.','Rul overkroppen frem og ned ved at spænde maven, ikke ved at trække med armene.','Lad vægten føre dig langsomt tilbage uden at slippe spændingen.'],'At presse med arme og hofter i stedet for maven.'],
+  'Pallof press':[['Stil dig med siden til kablet i brysthøjde, og hold håndtaget ind mod brystet med begge hænder.','Pres armene lige ud foran dig, og lad ikke overkroppen dreje med ind mod kablet.','Hold et øjeblik, og før langsomt håndtaget tilbage til brystet.'],'At lade kablet dreje overkroppen. Stå stramt og stabilt.'],
+  'Kabel woodchop':[['Sæt kablet højt, stil dig med siden til, og grib håndtaget med begge hænder over skulderen.','Træk håndtaget på skrå ned over kroppen mod modsatte hofte, og drej med overkroppen.','Før det kontrolleret tilbage på skrå op igen.'],'At rykke med armene. Drejningen skal komme fra overkroppen.'],
+  'Sit-ups på skråbænk':[['Lig på skråbænken med fødderne fastlåst og hænderne ved tindingerne eller over brystet.','Rul overkroppen op mod knæene ved at spænde maven.','Sænk langsomt tilbage, uden at falde ned på bænken.'],'At trække i nakken eller svinge for at få fart.']
 };
 var DESC_LC={};
 Object.keys(DESC).forEach(function(k){DESC_LC[k.toLowerCase()]=DESC[k]});
 var BYNAME={};
 CATALOG.forEach(function(c){BYNAME[c[0].toLowerCase()]=c});
-var CATS=['Push','Pull','Ben','Mave'].map(function(g){
+var CATS=['Push','Pull','Core + Ben'].map(function(g){
   return [g,CATALOG.filter(function(c){return c[1]===g}).map(function(c){return c[0]})];
 });
 var SUGGEST=CATALOG.map(function(c){return c[0]});
@@ -428,16 +436,26 @@ function fmtT(s){return Math.floor(s/60)+':'+pad(s%60)}
 
 /* ---------- state ---------- */
 function defaultPlan(){
-  return {example:true,restSec:90,autoRest:true,
+  return {v:2,example:true,restSec:90,autoRest:true,
     templates:[
       {id:'tpush',name:'Push',exercises:['Bænkpres','Skulderpres','Sidehævninger','Triceps pushdown']},
       {id:'tpull',name:'Pull',exercises:['Pull-ups','Vandret roning','Face pulls','Biceps curl']},
-      {id:'tben',name:'Ben',exercises:['Squat','Rumænsk dødløft','Benpres','Lægpres']}
+      {id:'tben',name:'Core + Ben',exercises:['Squat','Rumænsk dødløft','Benpres','Lægpres','Kabel crunch','Pallof press']}
     ],
     week:['tpush',null,'tpull',null,'tben',null,null]};
 }
+var MIGRATED=false;
 function normPlan(p){
   if(!Array.isArray(p.templates)) p.templates=[];
+  if(!(p.v>=2)){
+    p.templates.forEach(function(t){
+      if(t&&typeof t.name==='string'&&t.name.trim().toLowerCase()==='ben'&&Array.isArray(t.exercises)){
+        t.name='Core + Ben';
+        ['Kabel crunch','Pallof press'].forEach(function(x){ if(t.exercises.indexOf(x)<0) t.exercises.push(x); });
+      }
+    });
+    p.v=2; MIGRATED=true;
+  }
   if(!Array.isArray(p.week)) p.week=[];
   while(p.week.length<7) p.week.push(null);
   p.week=p.week.slice(0,7).map(function(x){return x||null});
@@ -448,6 +466,59 @@ function normPlan(p){
 var S={tab:'today',plan:defaultPlan(),sessions:{},activeId:null,syncErr:'',pendingRender:false,
   ui:{expanded:new Set(),confirm:null,exSel:null,metric:'e1rm'}};
 var T={total:90,left:90,running:false,finished:false,endAt:0};
+
+/* ---------- ur-forbindelse: sender pas, vægt og pause til uret via ntfy.sh ----------
+   Emnet (en hemmelig kode) gemmes kun på denne enhed, ikke i sikkerhedskopien. Det virker kun,
+   når siden kører som app på telefonen. Claude-versionen må ikke sende til andre servere. */
+var WK='jernlog:watch';
+var W={on:false,topic:'',last:'',timer:0,status:''};
+var TOPIC_OK=/^[A-Za-z0-9_-]{8,64}$/;
+function loadWatch(){
+  try{var o=JSON.parse(localStorage.getItem(WK)||'null'); if(o){W.on=!!o.on; W.topic=String(o.topic||'')}}catch(e){}
+}
+function saveWatch(){try{localStorage.setItem(WK,JSON.stringify({on:W.on,topic:W.topic}))}catch(e){}}
+function newTopic(){
+  var abc='abcdefghijklmnopqrstuvwxyz0123456789',b=new Uint8Array(26),s='jl-';
+  crypto.getRandomValues(b);
+  for(var i=0;i<b.length;i++) s+=abc.charAt(b[i]%abc.length);
+  return s;
+}
+/* Det uret skal vise: pas, aktuel øvelse, næste sæt (kg × gentagelser) og pause. */
+function watchState(){
+  var o={v:1,pas:null,ex:null,set:0,sets:0,kg:null,reps:null,next:null,klar:false,hvile:null};
+  var act=S.activeId&&S.sessions[S.activeId];
+  if(act&&!act.done){
+    o.pas=act.name;
+    var pend=act.entries.filter(function(e){return e.sets.some(function(s){return !s.done})});
+    if(pend.length){
+      var e=pend[0],si=0;
+      while(si<e.sets.length&&e.sets[si].done) si++;
+      o.ex=e.ex; o.set=si+1; o.sets=e.sets.length;
+      o.kg=e.sets[si].kg==null?null:e.sets[si].kg;
+      o.reps=e.sets[si].reps==null?null:e.sets[si].reps;
+      if(pend[1]) o.next=pend[1].ex;
+    } else o.klar=act.entries.length>0;
+  }
+  if(T.running||T.finished) o.hvile={end:T.endAt,total:T.total};
+  else if(T.left>0&&T.left<T.total) o.hvile={left:T.left,total:T.total};
+  return o;
+}
+function watchStatus(t){W.status=t; var el=document.getElementById('watch-status'); if(el) el.textContent=t}
+function pushWatch(force){
+  if(!W.on||!TOPIC_OK.test(W.topic)) return;
+  clearTimeout(W.timer);
+  W.timer=setTimeout(function(){
+    var o=watchState(),body=JSON.stringify(o);
+    if(!force&&body===W.last) return;
+    W.last=body; o.t=Date.now();
+    var d=new Date();
+    try{
+      fetch('https://ntfy.sh/'+W.topic,{method:'POST',body:JSON.stringify(o),mode:'no-cors'})
+        .then(function(){watchStatus('Sendt kl. '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()))})
+        .catch(function(){W.last='';watchStatus('Kunne ikke sende. Tjek nettet. Det virker kun i appen på telefonen.')});
+    }catch(e){W.last='';watchStatus('Kunne ikke sende.')}
+  },400);
+}
 
 /* ---------- derived data ---------- */
 function doneSessions(){
@@ -529,6 +600,7 @@ function save(id){
   clearTimeout(P.pend.get(id));
   P.pend.set(id,setTimeout(function(){flush(id)},500));
   syncUI();
+  if(id!=='plan') pushWatch();
 }
 function flush(id){
   P.pend.delete(id);
@@ -568,7 +640,7 @@ function onSnap(snap){
     if(busy(id)) return;
     var data=d.data(); if(!data) return;
     if(id==='plan'){
-      if(stable(S.plan)!==stable(data)){S.plan=normPlan(clone(data));changed=true}
+      if(stable(S.plan)!==stable(data)){S.plan=normPlan(clone(data));changed=true; if(MIGRATED){MIGRATED=false;save('plan')}}
     } else if(id.indexOf('s_')===0){
       if(!S.sessions[id]||stable(S.sessions[id])!==stable(data)){S.sessions[id]=clone(data);changed=true}
     }
@@ -587,6 +659,7 @@ function loadLocal(){
     var raw=localStorage.getItem(KEY);
     if(raw){var o=JSON.parse(raw); if(o.plan) S.plan=normPlan(o.plan); S.sessions=o.sessions||{};}
   }catch(e){}
+  if(MIGRATED){MIGRATED=false;save('plan')}
   adoptActive();
 }
 function planTouched(){S.plan.example=false;save('plan')}
@@ -654,6 +727,9 @@ var PICS={
   reardelt:'<circle class="hd" cx="8" cy="22" r="3"/><path d="M12 23H26L28 34L26 44H31M15 24L19 15"/><g class="eq"><circle cx="20" cy="12" r="3"/></g>',
   shrug:'<circle class="hd" cx="24" cy="11" r="3"/><path d="M24 17V32M24 19L17 21V31M24 19L31 21V31M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M12 31H36M12 15V7M9 10L12 7L15 10M36 15V7M33 10L36 7L39 10"/></g>',
   abwheel:'<circle class="hd" cx="12" cy="27" r="3"/><path d="M33 40L16 30M16 30L11 40M33 40H42"/><g class="eq"><circle cx="10" cy="40" r="3.5"/></g>',
+  abmachine:'<circle class="hd" cx="16" cy="11" r="3"/><path d="M16 16V31H30V43M16 18L26 22"/><g class="eq"><path d="M10 12V36M26 22V14M24 14H28M10 36H32"/></g>',
+  pallof:'<circle class="hd" cx="18" cy="10" r="3"/><path d="M18 15V30M18 17L22 21L24 18M18 30L14 44M18 30L22 44"/><g class="eq"><path d="M24 18H42"/><circle cx="42" cy="18" r="2.5"/></g>',
+  woodchop:'<circle class="hd" cx="24" cy="10" r="3"/><path d="M24 16V32M24 18L16 14L12 9M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M12 9L8 4"/><circle cx="7" cy="3" r="2.5"/></g>',
   generic:'<g class="eq"><path d="M16 24H32M12 17V31M36 17V31M8 21V27M40 21V27"/></g>'
 };
 /* Slutstilling til animationen. Samme elementer og samme antal tal som PICS, så de kan glide mellem hinanden. */
@@ -685,7 +761,10 @@ var PICSB={
   legraise:'<circle class="hd" cx="19.5" cy="12" r="3"/><path d="M24 5V30L25 45"/><g class="eq"><path d="M10 5H38"/></g>',
   reardelt:'<circle class="hd" cx="8" cy="22" r="3"/><path d="M12 23H26L28 34L26 44H31M15 24L15 34"/><g class="eq"><circle cx="15" cy="37" r="3"/></g>',
   shrug:'<circle class="hd" cx="24" cy="12" r="3"/><path d="M24 18V32M24 21L17 23V34M24 21L31 23V34M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M12 34H36M12 15V7M9 10L12 7L15 10M36 15V7M33 10L36 7L39 10"/></g>',
-  abwheel:'<circle class="hd" cx="25" cy="20" r="3"/><path d="M33 40L27 24M27 24L26 40M33 40H42"/><g class="eq"><circle cx="25" cy="40" r="3.5"/></g>'
+  abwheel:'<circle class="hd" cx="25" cy="20" r="3"/><path d="M33 40L27 24M27 24L26 40M33 40H42"/><g class="eq"><circle cx="25" cy="40" r="3.5"/></g>',
+  abmachine:'<circle class="hd" cx="21" cy="17" r="3"/><path d="M22 21V31H30V43M22 23L28 28"/><g class="eq"><path d="M10 12V36M28 28V20M26 20H30M10 36H32"/></g>',
+  pallof:'<circle class="hd" cx="18" cy="10" r="3"/><path d="M18 15V30M18 17L28 18L35 18M18 30L14 44M18 30L22 44"/><g class="eq"><path d="M35 18H42"/><circle cx="42" cy="18" r="2.5"/></g>',
+  woodchop:'<circle class="hd" cx="24" cy="10" r="3"/><path d="M24 16V32M24 18L30 26L34 33M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M34 33L40 40"/><circle cx="41" cy="41" r="2.5"/></g>'
 };
 var PICKEYS=[
   [/skrå/i,'incline'],[/bænk/i,'bench'],[/skulder|military|shoulder|overhead/i,'ohp'],[/sidehæv|lateral/i,'lateral'],
@@ -932,6 +1011,7 @@ function activeBlocks(act){
     h('div',{},h('p',{class:'eyebrow',text:'Pas i gang'}),h('h2',{text:act.name})),
     h('p',{class:'muted small',text:'Startet '+pad(st.getHours())+':'+pad(st.getMinutes())})));
   if(!act.entries.length) out.push(h('p',{class:'note',text:'Tilføj din første øvelse herunder.'}));
+  if(act.entries.length>1) out.push(h('p',{class:'muted small',text:'Øvelsen, du er i gang med, står øverst. Færdige øvelser rykker ned nederst.'}));
   act.entries.forEach(function(e,ei){out.push(exerciseCard(act,e,ei))});
   out.push(picker('add-ex','Vælg øvelse der skal tilføjes',function(name){
     act.entries.push(newEntry(name)); save(S.activeId); render();
@@ -1070,6 +1150,17 @@ function openSheet(ex,ctx){
   document.addEventListener('keydown',sheetKey);
   closeBtn.focus({preventScroll:true});
 }
+/* Øvelsen, du sidst loggede et sæt på, står øverst, så længe den har sæt tilbage.
+   Rækkefølge: den aktuelle, derefter øvelser med sæt tilbage, til sidst de færdige.
+   Returnerer true, hvis øvelsen skiftede plads (så siden kan scrolle op). */
+function promote(act,e){
+  var before=act.entries.indexOf(e);
+  function open(x){return x.sets.some(function(s){return !s.done})}
+  var rest=act.entries.filter(function(x){return x!==e});
+  var todo=rest.filter(open),fin=rest.filter(function(x){return !open(x)});
+  act.entries=open(e)?[e].concat(todo,fin):todo.concat(fin,[e]);
+  return act.entries.indexOf(e)!==before;
+}
 function setRow(act,e,ei,s,si){
   var row=h('div',{class:'set'+(s.done?' done':'')});
   var kg=h('input',{id:'kg-'+ei+'-'+si,type:'number',inputmode:'decimal',step:'0.5',min:'0',placeholder:'kg',
@@ -1083,7 +1174,9 @@ function setRow(act,e,ei,s,si){
       if(!s.done&&!(s.reps>0)){reps.focus();return}
       s.done=!s.done;
       if(s.done&&S.plan.autoRest) startTimer(S.plan.restSec);
+      var moved=promote(act,e);
       save(S.activeId); render();
+      if(moved) window.scrollTo(0,0);
     }});
   chk.innerHTML=CHECK;
   row.append(h('span',{class:'no',text:si+1}),kg,reps,chk);
@@ -1167,7 +1260,7 @@ function applyImport(){
   var p=S.ui.pendingImport; S.ui.pendingImport=null;
   if(!p) return;
   p.ids.forEach(function(id){S.sessions[id]=clone(p.sessions[id]); save(id)});
-  if(p.plan){S.plan=normPlan(clone(p.plan)); save('plan')}
+  if(p.plan){S.plan=normPlan(clone(p.plan)); MIGRATED=false; save('plan')}
   adoptActive(); syncRest(); render();
   toast('Indlæst: '+p.done+' pas'+(p.plan?' og din plan':''));
 }
@@ -1404,7 +1497,7 @@ function resetTimer(){T.running=false;T.finished=false;T.total=S.plan.restSec;T.
 function addTime(sec){
   if(T.running){T.endAt+=sec*1000}
   T.left=Math.max(1,T.left+sec); T.total=Math.max(T.total,T.left);
-  paintTimer();
+  paintTimer(); pushWatch();
 }
 function timerPrimary(){
   unlockAudio();
@@ -1412,7 +1505,7 @@ function timerPrimary(){
   else if(!T.finished&&T.left>0&&T.left<T.total) resumeTimer();
   else startTimer(T.total||S.plan.restSec);
 }
-function stateChanged(){syncBar(); if(S.tab==='timer') render(); else paintTimer();}
+function stateChanged(){syncBar(); if(S.tab==='timer') render(); else paintTimer(); pushWatch();}
 function tick(){
   if(!T.running) return;
   var left=Math.max(0,Math.ceil((T.endAt-Date.now())/1000));
@@ -1463,7 +1556,39 @@ function viewTimer(){
   root.append(h('label',{class:'checkrow',for:'auto-rest'},
     h('input',{id:'auto-rest',type:'checkbox',checked:S.plan.autoRest,onchange:function(ev){S.plan.autoRest=ev.target.checked;save('plan')}}),
     'Start pausen automatisk, når jeg afslutter et sæt'));
+  root.append(watchCard());
   return root;
+}
+function watchCard(){
+  var sec=h('section',{class:'card stack-s'},
+    h('h3',{text:'Ur-forbindelse'}),
+    h('p',{class:'note',text:'Send dit aktuelle pas, vægten til næste sæt og pausetiden til din Galaxy Watch. Det virker kun i appen på telefonen.'}),
+    h('label',{class:'checkrow',for:'watch-on'},
+      h('input',{id:'watch-on',type:'checkbox',checked:W.on,onchange:function(ev){
+        if(ev.target.checked&&!TOPIC_OK.test(W.topic)) W.topic=newTopic();
+        W.on=ev.target.checked; W.last=''; saveWatch(); pushWatch(true); render();
+      }}),
+      'Send til uret'));
+  if(!W.on) return sec;
+  var inp=h('input',{id:'watch-topic',class:'txt',value:W.topic,spellcheck:'false',autocomplete:'off',autocapitalize:'off',
+    'aria-label':'Emne til uret',onchange:function(ev){
+      var v=ev.target.value.trim();
+      if(TOPIC_OK.test(v)){W.topic=v; W.last=''; saveWatch(); pushWatch(true)}
+      else{ev.target.value=W.topic; toast('Emnet skal være 8–64 tegn: bogstaver, tal, - og _')}
+    }});
+  sec.append(h('p',{class:'eyebrow',text:'Emne (hemmelig kode)'}),inp,
+    h('div',{class:'row-actions'},
+      h('button',{class:'btn ghost sm',type:'button',onclick:function(){
+        var fail=function(){toast('Kunne ikke kopiere. Marker teksten i feltet.')};
+        try{navigator.clipboard.writeText(W.topic).then(function(){toast('Emnet er kopieret')},fail)}catch(e){fail()}
+      }},'Kopiér'),
+      h('button',{class:'btn ghost sm',type:'button',onclick:function(){pushWatch(true); toast('Sender til uret…')}},'Send nu'),
+      h('button',{class:'btn ghost sm',type:'button',onclick:function(){
+        W.topic=newTopic(); W.last=''; saveWatch(); pushWatch(true); render(); toast('Nyt emne. Husk at ændre det i urappen.');
+      }},'Nyt emne')),
+    h('p',{id:'watch-status',class:'muted small',text:W.status||'Ikke sendt endnu'}),
+    h('p',{class:'muted small',text:'Det samme emne skal stå i urappen. Emnet er den eneste beskyttelse, så del det ikke. Beskederne indeholder kun øvelse, vægt og pausetid og ligger kort tid hos ntfy.sh.'}));
+  return sec;
 }
 
 var VIEWS={today:viewToday,plan:viewPlan,progress:viewProgress,timer:viewTimer};
@@ -1480,6 +1605,7 @@ async function boot(){
   $('#rb-stop').addEventListener('click',function(){resetTimer()});
   setInterval(tick,250);
   document.addEventListener('visibilitychange',tick);
+  loadWatch();
   render();
   var db=null,uid=null;
   try{
