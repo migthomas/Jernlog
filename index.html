@@ -24,18 +24,21 @@
   --f-display:'Big Shoulders Display','Arial Narrow','Helvetica Neue',Arial,sans-serif;
   --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --nav-h:60px;
+  --fig:#2B3540; --fig-far:#A6B1BB; --mach:#8C98A4; --pad:#5D6975; --musc:#E5562C;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0F1317; --surface:#171C21; --surface-2:#202830; --ink:#E7EBEF; --ink-2:#98A3AE; --line:#2B343C;
     --plate:#6B9BFF; --plate-ink:#07142E; --pr:#F5C542; --pr-ink:#2A2000; --ok:#4CC27F; --danger:#FF7A6B;
+  --fig:#D3DAE1; --fig-far:#56626E; --mach:#5E6A76; --pad:#7E8B98; --musc:#FF7B4F;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0F1317; --surface:#171C21; --surface-2:#202830; --ink:#E7EBEF; --ink-2:#98A3AE; --line:#2B343C;
   --plate:#6B9BFF; --plate-ink:#07142E; --pr:#F5C542; --pr-ink:#2A2000; --ok:#4CC27F; --danger:#FF7A6B;
+  --fig:#D3DAE1; --fig-far:#56626E; --mach:#5E6A76; --pad:#7E8B98; --musc:#FF7B4F;
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -92,6 +95,8 @@ p{margin:0}
 .set .no{text-align:center;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .set input{width:100%;min-width:0;height:44px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);padding:0 8px;font:600 18px var(--f-body);font-variant-numeric:tabular-nums;text-align:center}
 .set.done input{color:var(--ink-2)}
+.set.warm .no{font:700 13px/1 var(--f-display);letter-spacing:.08em;color:var(--pr-ink);background:var(--pr);border-radius:4px;padding:4px 0}
+.set.warm input{background:transparent;border-style:dashed}
 .chk{height:44px;width:48px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line);border-radius:6px;background:transparent;color:var(--ink-2)}
 .set.done .chk{background:var(--plate);border-color:var(--plate);color:var(--plate-ink)}
 .chk svg{width:22px;height:22px}
@@ -110,6 +115,59 @@ p{margin:0}
 .sh-head h2{font-size:30px}
 .exico.big{width:100%;height:auto;padding:14px;border-radius:12px;gap:24px}
 .exico.big svg{width:min(180px,46vw);height:auto;aspect-ratio:1;stroke-width:2.2}
+.anim-svg path,.anim-svg circle,.anim-svg rect{stroke-linecap:round;stroke-linejoin:round}
+.anim-svg .lb{stroke:var(--fig);fill:none}
+.anim-svg .lf{stroke:var(--fig-far);fill:none}
+.anim-svg .fill{fill:var(--fig);stroke:none}
+.anim-svg .lf.fill{fill:var(--fig-far)}
+.anim-svg .tor{stroke:var(--fig);stroke-width:3}
+.anim-svg .nose{fill:var(--surface-2)}
+.anim-svg .gh{stroke:var(--fig);fill:none}
+.anim-svg .gh.fill{fill:var(--fig);stroke:none}
+.anim-svg .gh.tor{fill:var(--fig);stroke:var(--fig)}
+.anim-svg .ghost{opacity:.12}
+.anim-svg .msc{stroke:var(--musc);fill:none}
+.anim-svg .flr{stroke:var(--line);stroke-width:2}
+.anim-svg .mach{stroke:var(--mach);fill:none}
+.anim-svg .pad{fill:var(--pad);stroke:none}
+.anim-svg .padl{stroke:var(--pad);fill:none}
+.anim-svg .stack{fill:var(--mach);stroke:none;opacity:.55}
+.anim-svg .stl{stroke:var(--surface-2);stroke-width:1.2}
+.anim-svg .pul{fill:var(--surface-2);stroke:var(--mach);stroke-width:2.4}
+.anim-svg .cab{stroke:var(--ink-2);stroke-width:1.2;fill:none}
+.anim-svg .hdl{fill:var(--ink-2)}
+.anim-svg .pl{fill:var(--plate);fill-opacity:.2;stroke:var(--plate);stroke-width:3}
+.anim-svg .pl.solid{fill-opacity:1}
+.anim-svg .plr{fill:none;stroke:var(--plate);stroke-width:1;stroke-opacity:.6}
+.anim-svg .plh{fill:var(--plate)}
+.anim-svg .pl.solid+.plh{fill:var(--surface-2)}
+.anim-svg .pls{stroke:var(--plate);fill:none}
+.anim-svg .bar{stroke:var(--ink-2);fill:var(--ink-2)}
+.anim-svg .trk{fill:none;stroke:var(--plate);stroke-width:1.4;stroke-dasharray:1.5 3.5;opacity:.75}
+.anim-svg .far{opacity:.45}
+.anim{display:flex;flex-direction:column;gap:10px}
+.anim-stage{background:var(--surface-2);border-radius:12px;padding:6px 6px 2px}
+.anim-svg{display:block;width:100%;max-width:440px;height:auto;margin-inline:auto}
+.anim-ctl{display:flex;align-items:center;gap:10px}
+.anim-btn{flex:none;width:44px;height:44px;padding:0;border-radius:50%;border:1.5px solid var(--plate);background:var(--plate);color:var(--plate-ink);display:inline-flex;align-items:center;justify-content:center}
+.anim-btn svg{width:18px;height:18px;fill:currentColor}
+.anim-now{flex:1;min-width:0;display:flex;flex-direction:column;min-height:40px;justify-content:center}
+.anim-now b{font-weight:600;font-size:15px;line-height:1.25}
+.anim-now span{font-size:13px;color:var(--ink-2)}
+.anim-rep{font:700 15px/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.anim-spd{flex:none;min-height:36px;min-width:44px;padding:0 10px;border:1.5px solid var(--line);border-radius:6px;background:transparent;font-weight:600}
+.anim-tl{position:relative;display:flex;gap:3px}
+.anim-tl .sg{min-width:0;height:22px;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;border-radius:4px;background:var(--surface-2);color:var(--ink-2);font-size:11px;font-weight:600;letter-spacing:.04em;transition:background .2s,color .2s}
+.anim-tl .sg.on{background:var(--plate);color:var(--plate-ink)}
+.anim-tl .sg.ps.on{background:var(--ink-2)}
+.anim-tl .mk{position:absolute;top:-3px;bottom:-3px;width:2px;border-radius:1px;background:var(--ink);pointer-events:none}
+.anim-leg{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.anim-leg i{display:inline-block;width:14px;height:6px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.anim-leg .k1{background:var(--musc)}
+.anim-leg .k2{background:var(--musc);opacity:.45}
+.anim-leg .k3{height:0;border-top:2px dotted var(--plate);border-radius:0}
+.anim-leg .k4{background:var(--ink-2);opacity:.3}
+.anim-leg .v{margin-left:auto}
 .how{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;max-width:62ch}
 .how li::marker{font-weight:700;color:var(--plate)}
 .tip{padding:10px 12px;border-left:3px solid var(--pr);background:var(--surface-2);border-radius:0 6px 6px 0;font-size:14px}
@@ -197,6 +255,22 @@ p{margin:0}
 .day b{font-weight:600}
 .day .tag{margin-left:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--plate)}
 .tpl .ex-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.ftag{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:4px;background:var(--plate);color:var(--plate-ink);font:700 11px/1.5 var(--f-display);letter-spacing:.1em;text-transform:uppercase;vertical-align:1px}
+.tpl .ex-row.drop .nx-name{text-decoration:line-through;color:var(--ink-2)}
+.tpl .ex-row.drop .ftag{text-decoration:none}
+.tpl .ex-row.fadd{background:linear-gradient(90deg,color-mix(in srgb,var(--plate) 9%,transparent),transparent)}
+.focus{border-left:4px solid var(--plate)}
+.focus .fg{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:8px}
+.fg-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.fg-h b{font-weight:600}
+.fg-h .chg{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.fi{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:4px 0;border:0;background:transparent;text-align:left}
+.fi-t{min-width:0;flex:1}
+.fi-box{flex:none;width:24px;height:24px;border:1.5px solid var(--line);border-radius:5px;display:inline-flex;align-items:center;justify-content:center}
+.fi[aria-pressed="true"] .fi-box{background:var(--plate);border-color:var(--plate)}
+.fi[aria-pressed="true"] .fi-box::after{content:"";width:6px;height:11px;border:solid var(--plate-ink);border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.fi[aria-pressed="false"] .fi-t,.fi[aria-pressed="false"] .exico{opacity:.45}
+.fi[aria-pressed="false"] .nx-name{text-decoration:line-through}
 .tpl .x{width:36px;height:36px;border:0;background:transparent;color:var(--ink-2);font-size:20px;line-height:1}
 .tpl .nm{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);padding:0 12px;font:700 22px var(--f-display);letter-spacing:.03em;text-transform:uppercase}
 
@@ -265,14 +339,17 @@ var CATALOG=[
   ['Kabel sidehævninger','Push','lateral',[12,20,2.5],{Skuldre:1},['Håndvægt skulderpres','Face pulls','Bagskulder flyes']],
   ['Triceps pushdown','Push','pushdown',[10,15,2.5],{Triceps:1},['Overhead triceps extension','Skullcrushers','Biceps curl']],
   ['Overhead triceps extension','Push','overheadext',[10,15,2.5],{Triceps:1},['Triceps pushdown','Smal bænkpres','Hammer curl']],
+  ['Siddende skrå triceps pushdown','Push','seatpushdown',[10,15,2.5],{Triceps:1},['Triceps pushdown','Overhead triceps extension','Kabel curl']],
   ['Skullcrushers','Push','skull',[8,12,2.5],{Triceps:1},['Triceps pushdown','Overhead triceps extension','Preacher curl']],
 
   ['Pull-ups','Pull','pullup',[6,10,2.5],{Ryg:1,Biceps:.5},['Vandret roning','Face pulls','Biceps curl']],
   ['Chin-ups','Pull','pullup',[6,10,2.5],{Ryg:1,Biceps:.5},['Kabelroning','Bagskulder flyes','Hammer curl']],
   ['Lat pulldown','Pull','pullup',[8,12,2.5],{Ryg:1,Biceps:.5},['Kabelroning','Straight-arm pulldown','Biceps curl']],
+  ['Smal lat pulldown','Pull','pulldownclose',[8,12,2.5],{Ryg:1,Biceps:.5},['Lat pulldown','Kabelroning','Hammer curl']],
   ['Straight-arm pulldown','Pull','pushdown',[12,15,2.5],{Ryg:1},['Lat pulldown','Kabelroning','Face pulls']],
   ['Vandret roning','Pull','row',[8,12,2.5],{Ryg:1,Biceps:.5},['Pull-ups','Face pulls','Hammer curl']],
   ['Kabelroning','Pull','row',[10,12,2.5],{Ryg:1,Biceps:.5},['Lat pulldown','Face pulls','Biceps curl']],
+  ['Low row med smalt greb','Pull','lowrow',[8,12,2.5],{Ryg:1,Biceps:.5},['Smal lat pulldown','Face pulls','Hammer curl']],
   ['Enarms håndvægtsroning','Pull','row',[8,12,2],{Ryg:1,Biceps:.5},['Lat pulldown','Bagskulder flyes','Hammer curl']],
   ['Shrugs','Pull','shrug',[10,15,5],{Ryg:1},['Face pulls','Vandret roning','Sidehævninger']],
   ['Face pulls','Pull','facepull',[12,20,2.5],{Skuldre:1,Ryg:.5},['Sidehævninger','Kabelroning','Biceps curl']],
@@ -322,13 +399,16 @@ var DESC={
   'Kabel sidehævninger':[['Stå med siden til kablet, og tag håndtaget med den yderste hånd.','Løft armen ud til siden, op til skulderhøjde.','Sænk langsomt, og hold spændingen i bunden.'],'At trække skulderen op mod øret.'],
   'Triceps pushdown':[['Stå tæt ved kablet med albuerne ind til siden.','Pres håndtaget ned, til armene er strakte.','Lad det gå op til ca. 90° i albuen uden at flytte overarmene.'],'At læne sig ind over og presse med kropsvægten.'],
   'Overhead triceps extension':[['Hold en håndvægt eller et reb over hovedet med begge hænder.','Sænk vægten bag hovedet ved kun at bøje albuerne.','Stræk armene op igen.'],'At albuerne glider langt ud til siden.'],
+  'Siddende skrå triceps pushdown':[['Sæt den korte, bøjede stang på kablet i øverste position, og sæt dig på bænken foran kablet, let foroverlænet.','Hold albuerne fast ind til siden, og pres stangen skråt ned og frem, til armene er strakte.','Lad stangen komme langsomt op igen, til underarmene er lidt over vandret, uden at flytte overarmene.'],'At albuerne glider frem og op, så skuldrene tager over.'],
   'Skullcrushers':[['Lig på bænken med stangen strakt op over brystet.','Bøj albuerne, og sænk stangen mod panden eller lige bag hovedet.','Stræk armene igen uden at flytte overarmene.'],'At albuerne vandrer frem og tilbage.'],
   'Pull-ups':[['Hæng i stangen med overhåndsgreb lidt bredere end skuldrene.','Træk skulderbladene ned, og træk dig op, til hagen er over stangen.','Sænk kontrolleret til strakte arme.'],'At sparke eller svinge med benene.'],
   'Chin-ups':[['Hæng i stangen med underhåndsgreb i skulderbredde.','Træk dig op, til hagen er over stangen.','Sænk langsomt helt ned.'],'Halve gentagelser. Gå helt ned hver gang.'],
   'Lat pulldown':[['Sæt dig med lårene låst under puderne, og grib stangen bredt.','Træk stangen ned til øverste del af brystet med brystet frem.','Lad den gå op, til armene er strakte.'],'At læne sig langt tilbage og rykke vægten ned.'],
+  'Smal lat pulldown':[['Sæt de smalle håndtag med parallelt greb på kablet, og sæt dig med lårene låst under puderne.','Træk håndtagene ned mod øverste del af brystet med brystet frem og albuerne tæt ind langs kroppen.','Lad håndtagene gå langsomt op, til armene er strakte og du mærker et stræk i ryggen.'],'At læne sig langt tilbage og rykke vægten ned med kroppen.'],
   'Straight-arm pulldown':[['Stå foran kablet med strakte arme og let foroverlænet.','Pres stangen ned i en bue mod lårene med næsten strakte arme.','Før langsomt tilbage til øjenhøjde.'],'At bøje albuerne, så det bliver triceps, der arbejder.'],
   'Vandret roning':[['Bøj i hofterne, til overkroppen er ca. 45°, med ret ryg.','Træk stangen op mod navlen, og pres skulderbladene sammen.','Sænk kontrolleret.'],'At runde ryggen eller rette sig op for at få vægten med.'],
   'Kabelroning':[['Sid med let bøjede knæ og ret ryg.','Træk håndtaget ind mod maven, og pres skulderbladene sammen.','Stræk armene frem igen, og lad skuldrene følge med.'],'At gynge frem og tilbage med overkroppen.'],
+  'Low row med smalt greb':[['Sæt det smalle håndtag med parallelt greb på det nederste kabel, sæt dig med fødderne mod pladen og let bøjede knæ.','Sid med ret ryg, og træk håndtaget ind mod navlen med albuerne tæt langs kroppen. Pres skulderbladene sammen bagerst.','Stræk armene frem igen, og lad skuldrene glide med frem, uden at runde ryggen.'],'At gynge frem og tilbage med overkroppen for at få vægten med.'],
   'Enarms håndvægtsroning':[['Støt den ene hånd og det ene knæ på bænken.','Træk håndvægten op mod hoften med albuen tæt ind til kroppen.','Sænk langsomt, til du mærker et stræk i ryggen.'],'At dreje overkroppen op for at løfte vægten.'],
   'Shrugs':[['Stå med en stang eller håndvægte ned langs kroppen.','Løft skuldrene lige op mod ørerne.','Hold kort i toppen, og sænk langsomt.'],'At rulle skuldrene rundt.'],
   'Face pulls':[['Sæt kablet i hovedhøjde med et reb.','Træk rebet mod ansigtet, og før hænderne ud til siden.','Før langsomt tilbage.'],'For tung vægt, så du læner dig tilbage.'],
@@ -461,10 +541,12 @@ function normPlan(p){
   p.week=p.week.slice(0,7).map(function(x){return x||null});
   if(!(p.restSec>0)) p.restSec=90;
   p.autoRest=p.autoRest!==false;
+  p.warmup=p.warmup!==false;
+  if(p.focus&&!(typeof p.focus.week==='string'&&Array.isArray(p.focus.items))) delete p.focus;
   return p;
 }
 var S={tab:'today',plan:defaultPlan(),sessions:{},activeId:null,syncErr:'',pendingRender:false,
-  ui:{expanded:new Set(),confirm:null,exSel:null,metric:'e1rm'}};
+  ui:{expanded:new Set(),confirm:null,exSel:null,metric:'e1rm',focusOff:{}}};
 var T={total:90,left:90,running:false,finished:false,endAt:0};
 
 /* ---------- ur-forbindelse: sender pas, vægt og pause til uret via ntfy.sh ----------
@@ -493,7 +575,7 @@ function watchState(){
     if(pend.length){
       var e=pend[0],si=0;
       while(si<e.sets.length&&e.sets[si].done) si++;
-      o.ex=e.ex; o.set=si+1; o.sets=e.sets.length;
+      o.ex=e.ex; o.set=e.sets.slice(0,si).filter(function(x){return !x.warm}).length+(e.sets[si].warm?0:1); o.sets=workOf(e).length; o.opv=!!e.sets[si].warm;
       o.kg=e.sets[si].kg==null?null:e.sets[si].kg;
       o.reps=e.sets[si].reps==null?null:e.sets[si].reps;
       if(pend[1]) o.next=pend[1].ex;
@@ -526,7 +608,9 @@ function doneSessions(){
     .map(function(id){var s=Object.assign({},S.sessions[id]);s.id=id;return s})
     .sort(function(a,b){return a.startedAt-b.startedAt});
 }
-function doneSets(e){return e.sets.filter(function(s){return s.done&&s.reps>0})}
+/* Opvarmingssæt (warm:true) tæller ikke med i sæt, volumen, rekorder, vægtforslag eller muskelgrupper. */
+function doneSets(e){return e.sets.filter(function(s){return s.done&&s.reps>0&&!s.warm})}
+function workOf(e){return e.sets.filter(function(s){return !s.warm})}
 function e1rm(s){return s.kg>0&&s.reps>0?(s.reps===1?s.kg:s.kg*(1+s.reps/30)):null}
 function sessVol(s){
   return s.entries.reduce(function(a,e){return a+doneSets(e).reduce(function(b,x){return b+(x.kg||0)*x.reps},0)},0);
@@ -730,6 +814,9 @@ var PICS={
   abmachine:'<circle class="hd" cx="16" cy="11" r="3"/><path d="M16 16V31H30V43M16 18L26 22"/><g class="eq"><path d="M10 12V36M26 22V14M24 14H28M10 36H32"/></g>',
   pallof:'<circle class="hd" cx="18" cy="10" r="3"/><path d="M18 15V30M18 17L22 21L24 18M18 30L14 44M18 30L22 44"/><g class="eq"><path d="M24 18H42"/><circle cx="42" cy="18" r="2.5"/></g>',
   woodchop:'<circle class="hd" cx="24" cy="10" r="3"/><path d="M24 16V32M24 18L16 14L12 9M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M12 9L8 4"/><circle cx="7" cy="3" r="2.5"/></g>',
+  pulldownclose:'<circle class="hd" cx="21" cy="12" r="3"/><path d="M20 32L22 17M20 32H32V43M22 18L25 10L27 3"/><g class="eq"><path d="M27 0V3M24 3H30M12 35H26M28 29H36"/></g>',
+  seatpushdown:'<circle class="hd" cx="19" cy="10" r="3"/><path d="M18 30L19 16M18 30H29V42M19 17L21 26L28 19"/><g class="eq"><path d="M38 2L28 19M26 19H30M10 33H24M17 33V44"/><circle cx="38" cy="2" r="2.5"/></g>',
+  lowrow:'<circle class="hd" cx="15" cy="14" r="3"/><path d="M14 34L15 19M14 34L28 30L38 36M15 20L26 24L36 26"/><g class="eq"><path d="M44 28L36 26M36 24V28M6 38H22M40 30V42"/><circle cx="44" cy="28" r="2"/></g>',
   generic:'<g class="eq"><path d="M16 24H32M12 17V31M36 17V31M8 21V27M40 21V27"/></g>'
 };
 /* Slutstilling til animationen. Samme elementer og samme antal tal som PICS, så de kan glide mellem hinanden. */
@@ -764,7 +851,10 @@ var PICSB={
   abwheel:'<circle class="hd" cx="25" cy="20" r="3"/><path d="M33 40L27 24M27 24L26 40M33 40H42"/><g class="eq"><circle cx="25" cy="40" r="3.5"/></g>',
   abmachine:'<circle class="hd" cx="21" cy="17" r="3"/><path d="M22 21V31H30V43M22 23L28 28"/><g class="eq"><path d="M10 12V36M28 28V20M26 20H30M10 36H32"/></g>',
   pallof:'<circle class="hd" cx="18" cy="10" r="3"/><path d="M18 15V30M18 17L28 18L35 18M18 30L14 44M18 30L22 44"/><g class="eq"><path d="M35 18H42"/><circle cx="42" cy="18" r="2.5"/></g>',
-  woodchop:'<circle class="hd" cx="24" cy="10" r="3"/><path d="M24 16V32M24 18L30 26L34 33M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M34 33L40 40"/><circle cx="41" cy="41" r="2.5"/></g>'
+  woodchop:'<circle class="hd" cx="24" cy="10" r="3"/><path d="M24 16V32M24 18L30 26L34 33M24 32L19 44M24 32L29 44"/><g class="eq"><path d="M34 33L40 40"/><circle cx="41" cy="41" r="2.5"/></g>',
+  lowrow:'<circle class="hd" cx="13" cy="14" r="3"/><path d="M14 34L13 19M14 34L28 30L38 36M13 20L6 26L18 28"/><g class="eq"><path d="M44 28L18 28M18 26V30M6 38H22M40 30V42"/><circle cx="44" cy="28" r="2"/></g>',
+  pulldownclose:'<circle class="hd" cx="21" cy="12" r="3"/><path d="M20 32L22 17M20 32H32V43M22 18L19 27L27 21"/><g class="eq"><path d="M27 0V21M24 21H30M12 35H26M28 29H36"/></g>',
+  seatpushdown:'<circle class="hd" cx="19" cy="10" r="3"/><path d="M18 30L19 16M18 30H29V42M19 17L21 26L29 31"/><g class="eq"><path d="M38 2L29 31M27 31H31M10 33H24M17 33V44"/><circle cx="38" cy="2" r="2.5"/></g>'
 };
 var PICKEYS=[
   [/skrå/i,'incline'],[/bænk/i,'bench'],[/skulder|military|shoulder|overhead/i,'ohp'],[/sidehæv|lateral/i,'lateral'],
@@ -914,8 +1004,296 @@ function muscleBlock(){
   box.append(ax);
   sec.append(box);
   sec.append(h('p',{class:'muted small',text:'Grøn = i målet, gul = over, grå = under. Øvelsens primære muskel tæller et helt sæt, hjælpemuskler et halvt.'}));
+  if(off===0&&MUSCLES.some(function(m){return w.tot[m]<MTARGET[0]})) sec.append(h('button',{class:'btn ghost sm',type:'button',onclick:function(){S.ui.extraOpen=true;go('today')}},'Forslag til ekstra pas'));
+  if(off===0&&MUSCLES.some(function(m){return w.tot[m]<MTARGET[0]||w.tot[m]>MTARGET[1]})&&focusMode()) sec.append(h('button',{class:'btn ghost sm',type:'button',onclick:function(){go('plan')}},'Se forslag i Plan'));
   if(w.none) sec.append(h('p',{class:'muted small',text:w.none+' sæt er ikke talt med, fordi appen ikke kender øvelsen: '+w.noneEx.join(', ')+'.'}));
   return sec;
+}
+/* ---------- Ugens fokus ----------
+   Ud fra en uges sæt pr. muskelgruppe laves forslag til ugen efter:
+   - Under 10 sæt: ekstra øvelser (3 sæt) i det pas, gruppen hører naturligt til, til gruppen når 10. Højst 2 ekstra øvelser og 8 ekstra sæt pr. pas,
+     så passet ikke bliver for langt. Gruppen med størst mangel kommer først.
+     Er der ikke flere passende øvelser, lægges sæt oven i en eksisterende øvelse.
+   - Over 20 sæt: én øvelse sættes på pause, hvis det ikke trækker andre grupper under 10.
+   Ændringerne gælder kun den ene uge og ligger i S.plan.focus = {week, base, items:[{type:'add'|'sets'|'drop', tid, ex, n, m, off}]}. */
+var MCAT={Bryst:'Push',Skuldre:'Push',Triceps:'Push',Ryg:'Pull',Biceps:'Pull','Forlår':'Core + Ben',Baller:'Core + Ben','Baglår':'Core + Ben','Lægge':'Core + Ben',Mave:'Core + Ben'};
+var FOCUS_MAX=2,FOCUS_SETS=3,FOCUS_BUDGET=8;
+function addDays(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
+function focusLive(){
+  var f=S.plan.focus;
+  return f&&f.week>=iso(mondayOf(new Date()))?f:null;
+}
+function focusActive(){
+  var f=S.plan.focus;
+  return f&&f.week===iso(mondayOf(new Date()))?f:null;
+}
+/* Passets øvelser denne uge, med fokus lagt oveni. */
+function effEx(t){
+  var list=t.exercises.map(function(x){return {ex:x,extra:0}});
+  var f=focusActive(); if(!f) return list;
+  f.items.forEach(function(it){
+    if(it.tid!==t.id||it.off) return;
+    if(it.type==='drop') list=list.filter(function(o){return o.ex!==it.ex});
+    else if(it.type==='sets') list.forEach(function(o){if(o.ex===it.ex) o.extra+=it.n});
+    else if(it.type==='add'&&!list.some(function(o){return o.ex===it.ex})) list.push({ex:it.ex,extra:0,n:it.n});
+  });
+  return list;
+}
+function focusEntry(o){
+  var e=newEntry(o.ex),w=workOf(e).length,want=o.n?Math.max(o.n,w):w+o.extra;
+  want=Math.min(want,6);
+  while(workOf(e).length<want){var l=e.sets[e.sets.length-1]||{kg:null,reps:null};e.sets.push({kg:l.kg,reps:l.reps,done:false})}
+  return e;
+}
+function tplCat(t){
+  var c={},best=null;
+  t.exercises.forEach(function(x){var k=BYNAME[x.toLowerCase()];if(k)c[k[1]]=(c[k[1]]||0)+1});
+  Object.keys(c).forEach(function(k){if(best===null||c[k]>c[best]) best=k});
+  return best;
+}
+function focusMode(){
+  var cur=mondayOf(new Date()),curI=iso(cur),nextI=iso(addDays(cur,7));
+  var planned=S.plan.week.filter(Boolean).length,ds=doneSessions();
+  function cnt(st){var en=addDays(st,7);return ds.filter(function(s){var d=parseD(s.date);return d>=st&&d<en}).length}
+  var f=S.plan.focus,doneThis=cnt(cur);
+  if(f&&f.week===nextI) return {applied:f,target:nextI,off:0,done:doneThis,planned:planned};
+  if(planned&&doneThis>=planned) return {target:nextI,off:0,done:doneThis,planned:planned};
+  if(f&&f.week===curI) return {applied:f,target:curI,off:1,done:cnt(addDays(cur,-7)),planned:planned};
+  var doneLast=cnt(addDays(cur,-7));
+  if(!doneLast) return null;
+  return {target:curI,off:1,done:doneLast,planned:planned};
+}
+function focusPlan(off){
+  var w=muscleWeek(off),fr={};
+  S.plan.week.forEach(function(id){if(id) fr[id]=(fr[id]||0)+1});
+  var tpls=S.plan.templates.filter(function(t){return fr[t.id]&&t.exercises.length});
+  if(!tpls.length){tpls=S.plan.templates.filter(function(t){return t.exercises.length});tpls.forEach(function(t){fr[t.id]=1})}
+  var proj={},items=[],used={},spent={},full={};
+  MUSCLES.forEach(function(m){proj[m]=w.tot[m]});
+  function bump(ex,n,f,sign){var mm=muscles(ex)||{};Object.keys(mm).forEach(function(m){if(m in proj) proj[m]+=sign*n*f*mm[m]})}
+  function names(t){return t.exercises.concat(items.filter(function(i){return i.type==='add'&&i.tid===t.id}).map(function(i){return i.ex}))}
+  function left(t){return FOCUS_BUDGET-(spent[t.id]||0)}
+  function fits(m){
+    var c=tpls.filter(function(t){return tplCat(t)===MCAT[m]});
+    if(!c.length) c=tpls.filter(function(t){return t.exercises.some(function(x){var mm=muscles(x);return mm&&mm[m]})});
+    return c.sort(function(a,b){return (used[a.id]||0)-(used[b.id]||0)||fr[b.id]-fr[a.id]});
+  }
+  function pickEx(m,t){
+    var have=names(t),comp={},taken={};
+    have.forEach(function(x){var c=BYNAME[x.toLowerCase()];if(c)c[5].forEach(function(n){comp[n]=1})});
+    S.plan.templates.forEach(function(tt){tt.exercises.forEach(function(x){taken[x]=1})});
+    items.forEach(function(i){if(i.type==='add') taken[i.ex]=1});
+    var c=CATALOG.filter(function(c){return c[4][m]===1&&have.indexOf(c[0])<0&&!taken[c[0]]});
+    c.sort(function(a,b){
+      function sc(x){return (comp[x[0]]?2:0)+(history(x[0],1).length?1:0)+(Object.keys(x[4]).length===1?.5:0)}
+      return sc(b)-sc(a);
+    });
+    return c[0]?c[0][0]:null;
+  }
+  var under=MUSCLES.filter(function(m){return w.tot[m]<MTARGET[0]}).sort(function(a,b){return w.tot[a]-w.tot[b]});
+  for(var round=0;round<4;round++){
+    under.forEach(function(m){
+      if(proj[m]>=MTARGET[0]) return;
+      var cands=fits(m); if(!cands.length) return;
+      var room=cands.filter(function(t){return (used[t.id]||0)<FOCUS_MAX&&left(t)>=FOCUS_SETS});
+      for(var i=0;i<room.length;i++){
+        var ex=pickEx(m,room[i]);
+        if(ex){
+          var t0=room[i];
+          items.push({type:'add',tid:t0.id,ex:ex,n:FOCUS_SETS,m:m});
+          used[t0.id]=(used[t0.id]||0)+1; spent[t0.id]=(spent[t0.id]||0)+FOCUS_SETS; bump(ex,FOCUS_SETS,fr[t0.id],1); return;
+        }
+      }
+      /* Ingen plads til en ny øvelse: læg 1-2 sæt på en øvelse, der allerede rammer gruppen (højst 5 sæt i alt). */
+      for(var j=0;j<cands.length;j++){
+        var t=cands[j]; if(left(t)<1){full[t.id]=1;continue}
+        var hit=names(t).filter(function(x){
+          var mm=muscles(x); if(!mm||mm[m]!==1) return false;
+          var ad=items.filter(function(i){return i.tid===t.id&&i.ex===x&&i.type!=='drop'})[0];
+          var now=ad?(ad.type==='add'?ad.n:suggest(x).n+ad.n):suggest(x).n;
+          return now<5;
+        })[0];
+        if(hit){
+          var ad=items.filter(function(i){return i.tid===t.id&&i.ex===hit&&i.type!=='drop'})[0];
+          var now=ad?(ad.type==='add'?ad.n:suggest(hit).n+ad.n):suggest(hit).n;
+          var n=Math.max(1,Math.min(2,5-now,left(t),Math.ceil((MTARGET[0]-proj[m])/fr[t.id])));
+          if(ad) ad.n+=n; else items.push({type:'sets',tid:t.id,ex:hit,n:n,m:m});
+          spent[t.id]=(spent[t.id]||0)+n; bump(hit,n,fr[t.id],1); return;
+        }
+      }
+    });
+  }
+  MUSCLES.filter(function(m){return w.tot[m]>MTARGET[1]}).sort(function(a,b){return w.tot[b]-w.tot[a]}).forEach(function(m){
+    if(proj[m]<=MTARGET[1]) return;
+    var best=null;
+    tpls.forEach(function(t){
+      if(t.exercises.length<2) return;
+      t.exercises.forEach(function(x,i){
+        if(items.some(function(it){return it.tid===t.id&&it.ex===x})) return;
+        var mm=muscles(x); if(!mm||!mm[m]) return;
+        var n=suggest(x).n*fr[t.id];
+        var ok=Object.keys(mm).every(function(k){return !(k in proj)||proj[k]-n*mm[k]>=MTARGET[0]});
+        if(!ok) return;
+        var sc=(mm[m]===1?4:0)+(Object.keys(mm).length===1?2:0)+(i>0?2:0)-Math.abs(proj[m]-n*mm[m]-MTARGET[1])/10;
+        if(!best||sc>best.sc) best={sc:sc,t:t,x:x,n:suggest(x).n};
+      });
+    });
+    if(best){items.push({type:'drop',tid:best.t.id,ex:best.x,n:best.n,m:m});bump(best.x,best.n,fr[best.t.id],-1)}
+  });
+  return {w:w,items:items,proj:proj,fr:fr,full:Object.keys(full)};
+}
+function focusKey(it){return it.type+'|'+it.tid+'|'+it.ex}
+function tplName(id){var t=S.plan.templates.filter(function(t){return t.id===id})[0];return t?t.name:'Pas'}
+function focusRow(it,toggle){
+  var what=it.type==='add'?'+ '+it.ex:it.type==='sets'?'+'+it.n+' sæt på '+it.ex:'Pause: '+it.ex;
+  var sub=it.type==='add'?tplName(it.tid)+' · '+it.n+' sæt':it.type==='sets'?tplName(it.tid):tplName(it.tid)+' · '+it.n+' sæt færre';
+  var inner=[exIcon(it.ex,'sm'),h('span',{class:'fi-t'},h('span',{class:'nx-name',text:what}),h('span',{class:'nx',text:sub}))];
+  if(!toggle) return h('div',{class:'fi'},inner);
+  var on=!S.ui.focusOff[focusKey(it)];
+  return h('button',{class:'fi',type:'button','aria-pressed':String(on),onclick:function(){
+    var k=focusKey(it); if(S.ui.focusOff[k]) delete S.ui.focusOff[k]; else S.ui.focusOff[k]=1; render();
+  }},h('span',{class:'fi-box','aria-hidden':'true'}),inner);
+}
+function focusGroups(items,w,proj,toggle,wkB){
+  var by={};
+  items.forEach(function(it){(by[it.m]=by[it.m]||[]).push(it)});
+  return MUSCLES.filter(function(m){return by[m]}).map(function(m){
+    var to=proj?Math.round(proj[m]):null;
+    return h('div',{class:'fg'},
+      h('div',{class:'fg-h'},h('b',{text:m}),
+        h('span',{class:'chg',text:to!=null?nf.format(w.tot[m])+' → ca. '+to+' sæt':nf.format(w.tot[m])+' sæt i uge '+wkB})),
+      by[m].map(function(it){return focusRow(it,toggle)}));
+  });
+}
+function focusBlock(){
+  var md=focusMode(); if(!md) return null;
+  var wkT=isoWeek(parseD(md.target)),wkB=isoWeek(addDays(parseD(md.target),-7));
+  var lbl=md.off?'Denne uges fokus':'Næste uges fokus';
+  var card=h('section',{class:'card stack-s focus'},h('p',{class:'eyebrow',text:lbl}));
+  if(md.applied){
+    var f=md.applied,w=muscleWeek(md.off),live=f.items.filter(function(i){return !i.off});
+    card.append(h('h3',{text:'Lagt ind for uge '+wkT}));
+    card.append(h('p',{class:'note',text:md.off?'Ændringerne er med, når du starter passet. Du kan slå enkelte fra under passet herunder.':'Ændringerne kommer med fra mandag og gælder kun uge '+wkT+'.'}));
+    if(live.length) focusGroups(live,w,null,false,wkB).forEach(function(g){card.append(g)});
+    else card.append(h('p',{class:'muted small',text:'Alle ændringer er slået fra.'}));
+    card.append(h('div',{class:'row-actions'},h('button',{class:'btn ghost sm',type:'button',onclick:function(){
+      delete S.plan.focus; planTouched(); render(); toast('Fokus fjernet');
+    }},'Fortryd')));
+    return card;
+  }
+  if(S.plan.focusSkip===md.target){
+    return h('button',{class:'btn ghost sm',type:'button',onclick:function(){delete S.plan.focusSkip;planTouched();render()}},'Vis forslag til uge '+wkT);
+  }
+  var p=focusPlan(md.off);
+  card.append(h('h3',{text:'Forslag til uge '+wkT}));
+  var base='Ud fra uge '+wkB+' ('+md.done+' pas'+(md.planned?' af '+md.planned:'')+').';
+  if(!p.items.length){
+    var allIn=MUSCLES.every(function(m){return p.w.tot[m]>=MTARGET[0]&&p.w.tot[m]<=MTARGET[1]});
+    card.append(h('p',{class:'note',text:base+' '+(allIn?'Alle muskelgrupper lå i målet. Ingen ændringer.':'Der er ingen passende ændringer at foreslå med de pas, du har i ugeplanen.')}));
+    return card;
+  }
+  card.append(h('p',{class:'note',text:base+' Grupper under '+MTARGET[0]+' sæt får ekstra øvelser i det pas, de hører til. Grupper over '+MTARGET[1]+' får en øvelse på pause. Tryk på en linje for at fravælge den.'}));
+  if(md.planned&&md.done<md.planned) card.append(h('p',{class:'muted small',text:'Du nåede ikke alle planlagte pas i uge '+wkB+', så nogle grupper kan mangle sæt af den grund.'}));
+  focusGroups(p.items,p.w,p.proj,true).forEach(function(g){card.append(g)});
+  var under=MUSCLES.filter(function(m){return p.w.tot[m]<MTARGET[0]&&p.proj[m]<MTARGET[0]-.01});
+  if(under.length) card.append(h('p',{class:'muted small',text:under.join(', ')+' når ikke op på 10 sæt'+(p.full.length?', fordi '+p.full.map(tplName).join(' og ')+' højst får '+FOCUS_BUDGET+' ekstra sæt, så passet ikke bliver for langt':'')+'. Det kan løses med et ekstra pas i ugen, så de muskelgrupper trænes to gange.'}));
+  var sel=p.items.filter(function(it){return !S.ui.focusOff[focusKey(it)]});
+  card.append(h('div',{class:'row-actions'},
+    h('button',{class:'btn sm',type:'button',disabled:!sel.length,onclick:function(){
+      S.plan.focus={week:md.target,base:iso(addDays(parseD(md.target),-7)),items:clone(sel)};
+      delete S.plan.focusSkip; S.ui.focusOff={}; planTouched(); render();
+      toast(sel.length+' ændring'+(sel.length>1?'er':'')+' lagt ind for uge '+wkT);
+    }},'Læg ind i uge '+wkT),
+    h('button',{class:'btn ghost sm',type:'button',onclick:function(){S.plan.focusSkip=md.target;planTouched();render()}},'Ikke nu')));
+  return card;
+}
+/* ---------- Ekstra pas: forslag ud fra ugens sæt pr. muskelgruppe ----------
+   Medregner de planlagte pas, der er tilbage i ugen (inkl. ugens fokus), så forslaget kun fylder de huller,
+   planen ikke selv lukker. Vælger øvelser med gruppen som primær muskel og undgår at skubbe andre grupper over 20 sæt. */
+var EXTRA_MAX_EX=6,EXTRA_MAX_SETS=20;
+function weekRemaining(){
+  var now=new Date(),ti=dayIdx(now),today=iso(now);
+  var doneToday=doneSessions().some(function(s){return s.date===today});
+  var out=[];
+  S.plan.week.forEach(function(id,i){
+    if(!id||i<ti||(i===ti&&doneToday)) return;
+    var t=S.plan.templates.filter(function(x){return x.id===id})[0];
+    if(t&&t.exercises.length) out.push({t:t,day:i});
+  });
+  return out;
+}
+function extraPlan(){
+  var w=muscleWeek(0),proj={},rem=weekRemaining();
+  MUSCLES.forEach(function(m){proj[m]=w.tot[m]});
+  rem.forEach(function(r){
+    effEx(r.t).forEach(function(o){
+      var mm=muscles(o.ex); if(!mm) return;
+      var n=o.n||suggest(o.ex).n+(o.extra||0);
+      Object.keys(mm).forEach(function(m){if(m in proj) proj[m]+=n*mm[m]});
+    });
+  });
+  var start={};MUSCLES.forEach(function(m){start[m]=proj[m]});
+  var picks=[],used={},total=0;
+  function def(m){return MTARGET[0]-proj[m]}
+  for(var guard=0;guard<12&&picks.length<EXTRA_MAX_EX&&total<EXTRA_MAX_SETS;guard++){
+    var need=MUSCLES.filter(function(m){return def(m)>.25}).sort(function(a,b){return def(b)-def(a)});
+    if(!need.length) break;
+    var m=need[0],n=Math.max(2,Math.min(4,Math.ceil(def(m)),EXTRA_MAX_SETS-total));
+    if(n<2) break;
+    var best=null;
+    CATALOG.forEach(function(c){
+      if(used[c[0]]||c[4][m]!==1) return;
+      var mm=c[4],ok=true,gain=0;
+      Object.keys(mm).forEach(function(k){
+        if(!(k in proj)) return;
+        if(proj[k]+n*mm[k]>MTARGET[1]) ok=false;
+        if(k!==m&&def(k)>0) gain+=Math.min(def(k),n*mm[k]);
+      });
+      if(!ok) return;
+      var sc=(history(c[0],1).length?3:0)+gain*.6-(Object.keys(mm).length>1&&!gain?.5:0);
+      if(!best||sc>best.sc) best={sc:sc,c:c};
+    });
+    if(!best){proj[m]=MTARGET[0];continue}
+    used[best.c[0]]=1; total+=n;
+    picks.push({ex:best.c[0],n:n,m:m});
+    Object.keys(best.c[4]).forEach(function(k){if(k in proj) proj[k]+=n*best.c[4][k]});
+  }
+  return {w:w,rem:rem,start:start,proj:proj,picks:picks,total:total};
+}
+function startExtra(picks){
+  var id=rid('s_');
+  S.sessions[id]={date:iso(new Date()),name:'Ekstra pas',startedAt:Date.now(),done:false,
+    entries:picks.map(function(p){
+      var e=newEntry(p.ex),warm=e.sets.filter(function(s){return s.warm}),work=workOf(e);
+      while(work.length<p.n){var l=work[work.length-1]||{kg:null,reps:null};work.push({kg:l.kg,reps:l.reps,done:false})}
+      e.sets=warm.concat(work.slice(0,p.n));
+      return e;
+    })};
+  S.activeId=id; S.ui.extraOpen=false; save(id); render();
+}
+function extraCard(){
+  var x=extraPlan();
+  var card=h('section',{class:'card stack-s focus'},
+    h('p',{class:'eyebrow',text:'Forslag til ekstra pas'}),
+    h('h3',{text:x.picks.length?'Fyld hullerne i uge '+isoWeek(new Date()):'Ugen er dækket'}));
+  var remTxt=x.rem.length?'Medregnet: '+x.rem.map(function(r){return r.t.name+' '+DAYS[r.day].toLowerCase()}).join(', ')+'.':'Der er ingen planlagte pas tilbage i ugen.';
+  if(!x.picks.length){
+    card.append(h('p',{class:'note',text:'Med de pas, du allerede har lavet, og dem der er planlagt resten af ugen, når alle muskelgrupper 10 sæt. '+remTxt}));
+    card.append(h('div',{class:'row-actions'},h('button',{class:'btn ghost sm',type:'button',onclick:function(){S.ui.extraOpen=false;render()}},'Luk')));
+    return card;
+  }
+  card.append(h('p',{class:'note',text:'Øvelser til de muskelgrupper, der ellers ikke når 10 sæt i ugen. '+remTxt}));
+  x.picks.forEach(function(p){
+    var to=Math.round(x.proj[p.m]);
+    card.append(h('div',{class:'fi'},exIcon(p.ex,'sm'),
+      h('span',{class:'fi-t'},h('span',{class:'nx-name',text:p.ex}),
+        h('span',{class:'nx',text:p.n+' sæt · '+p.m+' '+nf.format(x.start[p.m])+' → ca. '+to}))));
+  });
+  card.append(h('p',{class:'muted small',text:x.picks.length+' øvelser · '+x.total+' sæt. Opvarmingssæt kommer oveni og tæller ikke med.'}));
+  card.append(h('div',{class:'row-actions'},
+    h('button',{class:'btn',type:'button',onclick:function(){startExtra(x.picks)}},'Start ekstra pas'),
+    h('button',{class:'btn ghost sm',type:'button',onclick:function(){S.ui.extraOpen=false;render()}},'Skjul')));
+  return card;
 }
 function exIcon(name,small){
   var key=picKey(name);
@@ -964,7 +1342,8 @@ function startBlocks(now){
     out.push(h('section',{class:'card plan-card'},
       h('p',{class:'eyebrow',text:'Planlagt i dag'}),
       h('h2',{text:tpl.name}),
-      h('p',{class:'muted',text:tpl.exercises.join(' · ')||'Ingen øvelser endnu'}),
+      focusActive()&&focusActive().items.some(function(i){return i.tid===tpl.id&&!i.off})&&h('p',{class:'small'},h('span',{class:'ftag',text:'Fokus'}),' Ugens ekstra øvelser og sæt er lagt ind.'),
+      h('p',{class:'muted',text:effEx(tpl).map(function(o){return o.ex}).join(' · ')||'Ingen øvelser endnu'}),
       h('button',{class:'btn',type:'button',onclick:function(){startSession(tpl)}},'Start '+tpl.name)));
   } else {
     out.push(h('section',{class:'card plan-card'},
@@ -981,7 +1360,9 @@ function startBlocks(now){
     h('h3',{class:'label',text:tpl?'Eller vælg et andet pas':'Vælg et pas'}),
     h('div',{class:'chips'},
       others.map(function(t){return h('button',{class:'chip',type:'button',onclick:function(){startSession(t)}},t.name)}),
+      h('button',{class:'chip',type:'button','aria-pressed':String(!!S.ui.extraOpen),onclick:function(){S.ui.extraOpen=!S.ui.extraOpen;render()}},'Ekstra pas · forslag'),
       h('button',{class:'chip',type:'button',onclick:function(){startSession(null)}},'Tomt pas'))));
+  if(S.ui.extraOpen) out.push(extraCard());
   var rec=doneSessions().reverse().slice(0,3);
   if(rec.length){
     out.push(h('section',{class:'stack-s'},
@@ -994,15 +1375,22 @@ function startBlocks(now){
   }
   return out;
 }
+function warmSet(ex){
+  var sg=suggest(ex),p=sg.p,kg=null;
+  if(sg.kg>0){kg=Math.round(sg.kg*0.5/p.inc)*p.inc; if(kg<p.inc) kg=p.inc; kg=r2(kg)}
+  else if(sg.kg===0) kg=0;
+  return {kg:kg,reps:Math.max(8,Math.round((p.lo+p.hi)/2)),done:false,warm:true};
+}
 function newEntry(ex){
   var sg=suggest(ex),sets=[];
+  if(S.plan.warmup!==false) sets.push(warmSet(ex));
   for(var i=0;i<sg.n;i++) sets.push({kg:sg.kg,reps:sg.reps,done:false});
   return {ex:ex,sets:sets};
 }
 function startSession(tpl){
   var id=rid('s_');
   S.sessions[id]={date:iso(new Date()),name:tpl?tpl.name:'Frit pas',startedAt:Date.now(),done:false,
-    entries:tpl?tpl.exercises.map(newEntry):[]};
+    entries:tpl?effEx(tpl).map(focusEntry):[]};
   S.activeId=id; save(id); render();
 }
 function activeBlocks(act){
@@ -1035,7 +1423,7 @@ function exerciseCard(act,e,ei){
       if(hasDone) ask('rm'+ei,rm); else rm();
     }},S.ui.confirm==='rm'+ei?'Sikker?':'Fjern')));
   var sg=suggest(e.ex),st=sugText(sg);
-  var pending=e.sets.filter(function(s){return !s.done});
+  var pending=e.sets.filter(function(s){return !s.done&&!s.warm});
   var differs=sg.kind!=='new'&&pending.some(function(s){return s.kg!==sg.kg||s.reps!==sg.reps});
   card.append(h('div',{class:'sug','data-kind':sg.kind},
     h('span',{class:'sug-chip',text:st.chip}),
@@ -1051,11 +1439,554 @@ function exerciseCard(act,e,ei){
       var p=e.sets[e.sets.length-1];
       e.sets.push({kg:p?p.kg:null,reps:p?p.reps:null,done:false}); save(S.activeId); render();
     }},'+ Sæt'),
-    e.sets.length>1&&h('button',{class:'btn ghost sm',type:'button',onclick:function(){
-      e.sets.pop(); save(S.activeId); render();
+    workOf(e).length>1&&h('button',{class:'btn ghost sm',type:'button',onclick:function(){
+      var i=e.sets.length-1; while(i>=0&&e.sets[i].warm) i--; if(i>=0) e.sets.splice(i,1); save(S.activeId); render();
     }},'Fjern sidste'),
+    (function(){
+      var w=e.sets.filter(function(x){return x.warm})[0];
+      if(w&&w.done) return null;
+      return h('button',{class:'btn ghost sm',type:'button',onclick:function(){
+        if(w) e.sets.splice(e.sets.indexOf(w),1); else e.sets.unshift(warmSet(e.ex));
+        save(S.activeId); render();
+      }},w?'Uden opvarmning':'+ Opvarmning');
+    })(),
     h('button',{class:'btn ghost sm guide',type:'button','aria-haspopup':'dialog',onclick:function(){openSheet(e.ex,{ei:ei})}},'Vejledning')));
   return card;
+}
+
+/* ---------- detaljerede øvelsesanimationer ----------
+   En figur med led (fra siden eller forfra). Hver øvelse har en start- og vendestilling; vinkler og mål glider mellem dem,
+   og arme/ben med et mål (fx stangen) regnes ud med to-leds IK, så lemmerne holder længden. */
+var ANIM=(function(){
+var F=142,LT=40,LU=25,LF=23,LTH=34,LS=33,LFT=13,NK=5,HR=8.5;
+function dir(a){a=a*Math.PI/180;return [Math.sin(a),-Math.cos(a)]}
+function nrm(a){a=a*Math.PI/180;return [Math.cos(a),Math.sin(a)]}
+function add(p,v,k){return [p[0]+v[0]*k,p[1]+v[1]*k]}
+function ang(p,q){return Math.atan2(q[0]-p[0],-(q[1]-p[1]))*180/Math.PI}
+function dist(p,q){return Math.hypot(q[0]-p[0],q[1]-p[1])}
+function nd(x){return ((x%360)+540)%360-180}
+function ik(r,t,l1,l2,b){
+  var d=dist(r,t),base=ang(r,t);
+  d=Math.max(Math.abs(l1-l2)+.01,Math.min(l1+l2-.01,d));
+  var c=(l1*l1+d*d-l2*l2)/(2*l1*d);c=Math.max(-1,Math.min(1,c));
+  var j=add(r,dir(base+b*Math.acos(c)*180/Math.PI),l1);
+  return [j,add(r,dir(base),d)];
+}
+function f(n){return Math.round(n*10)/10}
+function P2(p){return f(p[0])+' '+f(p[1])}
+function ln(p,q,c,w){return '<path class="'+c+'" d="M'+P2(p)+'L'+P2(q)+'"'+(w?' stroke-width="'+w+'"':'')+'/>'}
+function pl(pts,c,w){return '<path class="'+c+'" d="M'+pts.map(P2).join('L')+'"'+(w?' stroke-width="'+w+'"':'')+'/>'}
+function ci(p,r,c){return '<circle class="'+c+'" cx="'+f(p[0])+'" cy="'+f(p[1])+'" r="'+r+'"/>'}
+function rc(x,y,w,h,c,rx){return '<rect class="'+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="'+(rx||1.5)+'"/>'}
+
+/* ---------- løsning af en stilling til ledpunkter ---------- */
+function target(P,k,J){
+  var v;
+  if(v=P['H'+k]) return v;
+  if(v=P['HS'+k]) return [J.sh[0]+v[0],J.sh[1]+v[1]];
+  if(v=P['HH'+k]) return [J.hip[0]+v[0],J.hip[1]+v[1]];
+  if(v=P['HK'+k]) return [J.kn1[0]+v[0],J.kn1[1]+v[1]];
+  if(v=P['HT'+k]) return add(add(J.sh,dir(P.t),v[0]),nrm(P.t),v[1]);
+  if(v=P['HF'+k]){var dy=v[0]-J.sh[1];return [J.sh[0]+Math.sqrt(Math.max(0,v[1]*v[1]-dy*dy)),v[0]]}
+  return null;
+}
+function arm(P,k,root,J){
+  var uk=P['uk'+k]||1,fk=P['fk'+k]||1,t=target(P,k,J),el,ha;
+  if(P.fs&&t){uk=fk=Math.min(1,(dist(root,t)+1.5)/(LU+LF));J['fs'+k]=uk}
+  if(t){var r=ik(root,t,LU*uk,LF*fk,P['kb'+k]||1);
+    if(P.v!=='f'&&!P.kbf){r=ik(root,t,LU*uk,LF*fk,1);if(nd(ang(root,r[0])-ang(r[0],r[1]))<0) r=ik(root,t,LU*uk,LF*fk,-1)}
+    el=r[0];ha=r[1]}
+  else{var o=P.ar?P.t:0;el=add(root,dir(P['ua'+k]+o),LU*uk);ha=add(el,dir(P['fa'+k]+o),LF*fk)}
+  J['el'+k]=el;J['ha'+k]=ha;J['ua'+k]=ang(root,el);J['fa'+k]=ang(el,ha);
+}
+function leg(P,k,root,J){
+  var kn,an,tk=P['thk'+k]||1;
+  if(P['A'+k]){var r=ik(root,P['A'+k],LTH*tk,LS,P['lb'+k]||-1);
+    if(P.v!=='f'){r=ik(root,P['A'+k],LTH*tk,LS,1);if(nd(ang(r[0],r[1])-ang(root,r[0]))<0) r=ik(root,P['A'+k],LTH*tk,LS,-1)}
+    kn=r[0];an=r[1]}
+  else if(P['K'+k]){kn=P['K'+k];an=add(kn,dir(P['sh'+k]),LS)}
+  else{kn=add(root,dir(P['th'+k]),LTH*tk);an=add(kn,dir(P['sh'+k]),LS)}
+  J['kn'+k]=kn;J['an'+k]=an;J['th'+k]=ang(root,kn);J['sh'+k]=ang(kn,an);
+  J['to'+k]=P.v==='f'?add(an,[k===1?1:-1,0],6):add(an,dir(P['p'+k]==null?95:P['p'+k]),LFT);
+}
+var MIRROR=[['ua','fa','H','HS','HH','HK','HT','HF','kb','uk','fk'],['A','K','th','sh','lb','p','thk']];
+function fill2(P){MIRROR.forEach(function(g){fillG(P,g)})}
+function fillG(P,G){
+  var has=false;G.forEach(function(n){if(P[n+'2']!=null)has=true});
+  if(has) return;
+  G.forEach(function(n){
+    var v=P[n+'1'];if(v==null) return;
+    if(P.v!=='f'){P[n+'2']=v;return}
+    if(n==='ua'||n==='fa'||n==='th'||n==='sh') P[n+'2']=-v;
+    else if(n==='kb'||n==='lb') P[n+'2']=-v;
+    else if(n==='H'||n==='A'||n==='K') P[n+'2']=[2*P.x-v[0],v[1]];
+    else if(n==='HS'||n==='HH') P[n+'2']=[-v[0],v[1]];
+    else P[n+'2']=v;
+  });
+}
+function solve(P){
+  fill2(P);
+  if(P.hipK){var hk=add([P.hipK[0],P.hipK[1]],dir(P.hipK[2]),LTH);P.x=hk[0];P.y=hk[1]}
+  var J={P:P},hip=[P.x,P.y];J.hip=hip;
+  if(P.v==='f'){
+    var tl=P.tl||1,e=P.e||0,nb=add(hip,dir(P.t||0),LT*tl);
+    J.nb=nb;J.sh=nb;
+    J.s1=[nb[0]+13,nb[1]+3-e];J.s2=[nb[0]-13,nb[1]+3-e];
+    J.head=[nb[0]+(P.hx||0),nb[1]-NK-HR+(P.hd||0)];
+    J.h1=[hip[0]+7,hip[1]];J.h2=[hip[0]-7,hip[1]];
+    arm(P,1,J.s1,J);arm(P,2,J.s2,J);
+    leg(P,1,J.h1,J);leg(P,2,J.h2,J);
+  }else{
+    var sh=add(hip,dir(P.t),LT),hn=P.t+(P.n||0);
+    J.sh=sh;J.hn=hn;J.head=add(sh,dir(hn),NK+HR);J.nk=add(sh,dir(hn),NK);
+    leg(P,1,hip,J);leg(P,2,hip,J);
+    arm(P,1,sh,J);arm(P,2,sh,J);
+  }
+  return J;
+}
+
+/* ---------- muskler ---------- */
+/* [segment, fra, til, side (+1 forside, -1 bagside, 0 midt), bredde, afstand] */
+var MS={
+  Bryst:[['T',.62,.9,1,7,4.5]], Skuldre:[['U',.02,.3,0,9.5,0]], Triceps:[['U',.32,.86,-1,5,2.2]],
+  Biceps:[['U',.32,.86,1,5,2.2]], Ryg:[['T',.38,.86,-1,6,4.6]], 'Forlår':[['Th',.12,.86,1,6.5,2.6]],
+  'Baglår':[['Th',.18,.86,-1,6,2.6]], Baller:[['T',-.05,.16,-1,8,4.5],['Th',0,.28,-1,7,3]],
+  'Lægge':[['S',.1,.5,-1,6,2.4]], Mave:[['T',.14,.56,1,5.5,4.6]], 'Fælder':[['T',.88,1,-1,6,4]],
+  'Skrå':[['T',.14,.55,0,6,0]]
+};
+var MF={
+  Bryst:[['C',.68,.88,5.5,7.5],['C',.68,.88,-5.5,7.5]], Skuldre:[['U1',.02,.3,0,10],['U2',.02,.3,0,10]],
+  Ryg:[['C',.32,.8,9.5,5],['C',.32,.8,-9.5,5]], 'Fælder':[['TR',0,0,0,5.5]],
+  Mave:[['C',.12,.58,0,8]], 'Skrå':[['C',.14,.55,8,4.5],['C',.14,.55,-8,4.5]],
+  Biceps:[['U1',.35,.85,0,5],['U2',.35,.85,0,5]], Triceps:[['U1',.35,.85,0,5],['U2',.35,.85,0,5]],
+  'Forlår':[['Th1',.15,.85,0,7],['Th2',.15,.85,0,7]], 'Baglår':[], Baller:[], 'Lægge':[]
+};
+function segPts(J,s){
+  if(s==='T') return [J.hip,J.sh];
+  if(s==='U') return [J.sh,J.el1];
+  if(s==='Th') return [J.hip,J.kn1];
+  if(s==='S') return [J.kn1,J.an1];
+}
+function muscleSide(J,list,op){
+  var out='';
+  list.forEach(function(m){
+    (MS[m[0]]||[]).forEach(function(s){
+      var pq=segPts(J,s[0]);if(!pq) return;
+      var a=ang(pq[0],pq[1]),L=dist(pq[0],pq[1]),N=nrm(a);
+      var sg=s[0]==='T'?s[3]:-s[3];
+      var o=[N[0]*sg*s[5],N[1]*sg*s[5]];
+      var p=add(add(pq[0],dir(a),L*s[1]),o,1),q=add(add(pq[0],dir(a),L*s[2]),o,1);
+      out+='<path class="msc" d="M'+P2(p)+'L'+P2(q)+'" stroke-width="'+s[4]+'" stroke-opacity="'+f(op*m[1])+'"/>';
+    });
+  });
+  return out;
+}
+function muscleFront(J,list,op){
+  var out='',P=J.P;
+  list.forEach(function(m){
+    (MF[m[0]]||[]).forEach(function(s){
+      var p,q,w=s[s.length-1];
+      if(s[0]==='TR'){
+        out+=pl([J.s1,[J.nb[0]+4,J.nb[1]-1]],'msc',w).replace('/>',' stroke-opacity="'+f(op*m[1])+'"/>');
+        out+=pl([J.s2,[J.nb[0]-4,J.nb[1]-1]],'msc',w).replace('/>',' stroke-opacity="'+f(op*m[1])+'"/>');
+        return;
+      }
+      if(s[0]==='C'){var a=ang(J.hip,J.nb),L=dist(J.hip,J.nb),N=nrm(a);
+        p=add(add(J.hip,dir(a),L*s[1]),N,s[3]);q=add(add(J.hip,dir(a),L*s[2]),N,s[3]);}
+      else{var k=s[0].slice(-1),root=s[0][0]==='U'?J['s'+k]:J['h'+k],end=s[0][0]==='U'?J['el'+k]:J['kn'+k];
+        var a2=ang(root,end),L2=dist(root,end);p=add(root,dir(a2),L2*s[1]);q=add(root,dir(a2),L2*s[2]);}
+      out+='<path class="msc" d="M'+P2(p)+'L'+P2(q)+'" stroke-width="'+w+'" stroke-opacity="'+f(op*m[1])+'"/>';
+    });
+  });
+  return out;
+}
+
+/* ---------- figuren ---------- */
+function bodySide(J,list,op,ghost){
+  var c=ghost?'gh':'lb',cf=ghost?'gh':'lf',o='';
+  // fjerne arm og ben
+  o+=ln(J.hip,J.kn2,cf,12)+ln(J.kn2,J.an2,cf,9.5)+ln(J.an2,J.to2,cf,6);
+  o+=ln(J.sh,J.el2,cf,8.5)+ln(J.el2,J.ha2,cf,7)+ci(J.ha2,3.6,cf+' fill');
+  o+=(J.eqMid||'');
+  // krop
+  o+=ln(J.hip,J.sh,c,14)+ln(add(J.hip,dir(ang(J.hip,J.sh)),dist(J.hip,J.sh)*.45),J.sh,c,16.5);
+  if(!ghost) o+=muscleSide(J,list.filter(function(m){return MS[m[0]]&&MS[m[0]][0][0]==='T'}),op);
+  o+=ln(J.hip,J.kn1,c,12)+ln(J.kn1,J.an1,c,9.5)+ln(J.an1,J.to1,c,6);
+  if(!ghost) o+=muscleSide(J,list.filter(function(m){var s=MS[m[0]];return s&&(s[0][0]==='Th'||s[0][0]==='S'||s.length>1)}).map(function(m){
+      return m[0]==='Baller'?['BallerTh',m[1]]:m}),op);
+  o+=ln(J.sh,J.nk,c,6.5)+ci(J.head,HR,c+' fill');
+  if(!ghost) o+=ci(add(J.head,dir(J.hn+90),HR-.5),1.7,'nose');
+  o+=ln(J.sh,J.el1,c,8.5)+ln(J.el1,J.ha1,c,7)+ci(J.ha1,3.6,c+' fill');
+  if(!ghost) o+=muscleSide(J,list.filter(function(m){return MS[m[0]]&&MS[m[0]][0][0]==='U'}),op);
+  return o;
+}
+MS.BallerTh=[['Th',0,.3,-1,7.5,3]];
+function bodyFront(J,list,op,ghost){
+  var c=ghost?'gh':'lb',o='',P=J.P;
+  // ben
+  [1,2].forEach(function(k){o+=ln(J['h'+k],J['kn'+k],c,11)+ln(J['kn'+k],J['an'+k],c,8.5)+ln(J['an'+k],J['to'+k],c,6)});
+  if(!ghost) o+=muscleFront(J,list.filter(function(m){return m[0]==='Forlår'}),op);
+  // overkrop som trapez
+  var a=ang(J.hip,J.nb),N=nrm(a),D=dir(a),L=dist(J.hip,J.nb);
+  var w1=add(J.hip,N,10.5),w2=add(J.hip,N,-10.5),m1=add(add(J.hip,D,L*.45),N,9),m2=add(add(J.hip,D,L*.45),N,-9);
+  var t1=[J.s1[0]-2,J.s1[1]+1],t2=[J.s2[0]+2,J.s2[1]+1];
+  o+='<path class="'+c+' fill tor" d="M'+[w1,m1,t1,[J.nb[0]+5,J.nb[1]-1.5],[J.nb[0]-5,J.nb[1]-1.5],t2,m2,w2].map(P2).join('L')+'Z"/>';
+  if(!ghost) o+=muscleFront(J,list.filter(function(m){return /Bryst|Ryg|Mave|Skrå|Fælder/.test(m[0])}),op);
+  if(P.hd>6) o+=ci(J.head,HR,c+' fill');
+  else o+=ln(J.nb,[J.nb[0],J.nb[1]-NK],c,7)+ci(J.head,HR,c+' fill');
+  // arme
+  [1,2].forEach(function(k){var hs=J['fs'+k]?1+(1-J['fs'+k])*.7:(P.hsz||1);
+    o+=ln(J['s'+k],J['el'+k],c,8.5)+ln(J['el'+k],J['ha'+k],c,7)+ci(J['ha'+k],f(3.6*hs),c+' fill')});
+  if(!ghost) o+=muscleFront(J,list.filter(function(m){return /Skuldre|Biceps|Triceps/.test(m[0])}),op);
+  return o;
+}
+
+/* ---------- udstyr ---------- */
+var E={
+  floor:function(){return ln([2,F+.8],[198,F+.8],'flr')},
+  plate:function(p,r){r=r||13;return ci(p,r,'pl')+ci(p,r*.42,'plr')+ci(p,2.2,'plh')},
+  db:function(p,r){r=r||5.6;return ci(p,r,'pl solid')+ci(p,1.8,'plh')},
+  dbv:function(p,a,len){len=len||9;var d=dir(a+90);return ln(add(p,d,-len),add(p,d,len),'bar',2.6)+ln(add(p,d,-len-1),add(p,d,-len+4.5),'pls',8)+ln(add(p,d,len+1),add(p,d,len-4.5),'pls',8)},
+  bbf:function(p,q,half){ // stang forfra mellem to hænder
+    var cx=(p[0]+q[0])/2,cy=(p[1]+q[1])/2,a=Math.atan2(q[1]-p[1],q[0]-p[0]),u=[Math.cos(a),Math.sin(a)],h=half||58;
+    var A=add([cx,cy],u,-h),B=add([cx,cy],u,h),o=ln(A,B,'bar',2.6);
+    [-1,1].forEach(function(s){var c=add([cx,cy],u,s*(h-6));o+=ln(add(c,[-u[1],u[0]],-15),add(c,[-u[1],u[0]],15),'pls',6)+ln(add(add(c,u,s*5),[-u[1],u[0]],-10),add(add(c,u,s*5),[-u[1],u[0]],10),'pls',4)});
+    return o;
+  },
+  barf:function(p,q,ext){var a=Math.atan2(q[1]-p[1],q[0]-p[0]),u=[Math.cos(a),Math.sin(a)];return ln(add(p,u,-(ext||6)),add(q,u,ext||6),'bar',3)},
+  bench:function(x1,x2,y,h){h=h||7;return rc(x1,y,x2-x1,h,'pad',2.5)+ln([x1+8,y+h],[x1+8,F],'mach',3.5)+ln([x2-8,y+h],[x2-8,F],'mach',3.5)+ln([x1+2,F-1],[x1+14,F-1],'mach',3)+ln([x2-14,F-1],[x2-2,F-1],'mach',3)},
+  padl:function(p,q,w){return ln(p,q,'padl',w||7)},
+  tower:function(x,top){return ln([x,top],[x,F],'mach',4.5)+rc(x-8,F-34,16,32,'stack',2)+ln([x-8,F-26],[x+8,F-26],'stl')+ln([x-8,F-18],[x+8,F-18],'stl')+ln([x-8,F-10],[x+8,F-10],'stl')+ln([x-11,F-1],[x+11,F-1],'mach',3)},
+  pulley:function(p){return ci(p,3.6,'pul')},
+  cable:function(p,q){return ln(p,q,'cab')},
+  handle:function(p){return ci(p,2.2,'hdl')}
+};
+function bend(J,x1,x2,y){return E.bench(x1,x2,y)}
+
+/* ---------- øvelserne ---------- */
+var S=function(o){o.v='s';return o},Fv=function(o){o.v='f';return o};
+function ext(base,o){var r={};for(var k in base)r[k]=base[k];for(k in o)r[k]=o[k];return r}
+var D={};
+var stand={x:100,y:72,t:0,n:0,A1:[101,139],lb1:-1,p1:95};
+
+/* --- bryst/skuldre/triceps --- */
+var benchA=S({x:110,y:98.5,t:-90,n:0,H1:[73,52],kb1:1,A1:[146,139],lb1:-1,p1:95});
+D['bænkpres']={A:benchA,B:ext(benchA,{H1:[80,86]}),con:0,lbl:['Sænk stangen til nederste del af brystet','Pres stangen op over skuldrene'],trk:'ha1',
+  eq:function(J){return {b:E.bench(30,134,106),f:E.plate(J.ha1)}}};
+D['håndvægtspres']={A:ext(benchA,{H1:[75,54]}),B:ext(benchA,{H1:[80,94]}),con:0,lbl:['Sænk håndvægtene ud til siden af brystet','Pres op og lidt ind mod hinanden'],trk:'ha1',
+  eq:function(J){return {b:E.bench(30,134,106),f:E.db(J.ha1,6.5)}}};
+D['smal bænkpres']={A:benchA,B:ext(benchA,{H1:[86,88]}),con:0,lbl:['Sænk med albuerne tæt ind til kroppen','Pres op – triceps gør arbejdet'],trk:'ha1',
+  eq:function(J){return {b:E.bench(30,134,106),f:E.plate(J.ha1)}},m:[['Triceps',1],['Bryst',.5],['Skuldre',.5]]};
+var incA=S({x:112,y:100,t:-55,n:0,H1:[82,30],kb1:1,A1:[150,139],lb1:-1,p1:95});
+D['skråbænkpres']={A:incA,B:ext(incA,{H1:[90,66]}),con:0,lbl:['Sænk stangen til øverste del af brystet','Pres lodret op'],trk:'ha1',
+  eq:function(J){var N=nrm(-55),b0=add(add([112,100],N,-9),dir(-55),-8),b1=add(b0,dir(-55),58);
+    return {b:E.padl(b0,b1,7)+ln(add(b0,[0,4],1),[b0[0],F],'mach',3.5)+ln([b1[0]+4,b1[1]+4],[b1[0]+4,F],'mach',3.5)+rc(100,106,30,6,'pad',2.5)+ln([115,112],[115,F],'mach',3.5)+ln([60,F-1],[132,F-1],'mach',3),f:E.plate(J.ha1)}}};
+var puA=S({x:88,y:108.5,t:73.6,n:-12,H1:[130,139],kb1:1,th1:253.6,sh1:253.6,p1:165.7});
+D['armstrækninger']={A:puA,B:ext(puA,{x:93.7,y:122,t:85.7,th1:265.7,sh1:265.7,p1:180,n:-6}),con:0,lbl:['Sænk hele kroppen som en planke','Pres op – hold hofterne i linje'],trk:'sh'};
+var flyA=Fv({x:100,y:74,t:0,H1:[158,32],kb1:1,A1:[111,139],lb1:1});
+D['kabelflyes']={A:flyA,B:ext(flyA,{H1:[106,74]}),con:1,hold:[.35,.7],lbl:['Før hænderne sammen i en bue foran kroppen','Åbn langsomt – mærk strækket i brystet'],trk:'ha1',
+  eq:function(J){return {b:E.tower(10,-28)+E.tower(190,-28)+E.pulley([16,-14])+E.pulley([184,-14]),f:E.cable([184,-14],J.ha1)+E.cable([16,-14],J.ha2)+E.handle(J.ha1)+E.handle(J.ha2)}}};
+var pdA=S({x:86,y:100,t:0,n:0,ua1:90,uk1:-.72,fa1:0,A1:[118,139],lb1:-1,p1:95});
+D['pec deck']={A:pdA,B:ext(pdA,{uk1:.72}),con:1,hold:[.35,.7],lbl:['Klem albuerne sammen foran brystet','Åbn kontrolleret til armene er ud til siden'],trk:'el1',view:'Set fra siden · albuerne bevæger sig ind mod dig og ud igen',
+  eq:function(J){var pad=ln(add(J.el1,[0,4],1),add(J.ha1,[0,-2],1),'padl',8);
+    return {b:E.padl([75,108],[73,50],7)+rc(66,106,40,6,'pad',2.5)+ln([86,112],[86,F],'mach',3.5)+ln([62,F-1],[110,F-1],'mach',3)+ln([60,-20],[60,F],'mach',4)+ln([60,-20],[J.sh[0],-20],'mach',4)+ln([J.sh[0],-20],[J.sh[0],J.ha1[1]-6],'mach',2.5),f:pad}}};
+var dipA=S({x:88,y:69.5,t:12,n:-6,H1:[101,79],kb1:1,th1:172,sh1:285,p1:268});
+D['dips']={A:dipA,B:ext(dipA,{x:79,y:90,t:26,n:-14}),con:0,lbl:['Sænk til overarmen er vandret','Pres op til strakte arme'],trk:'sh',
+  eq:function(){return {b:ln([66,80],[136,80],'mach',5)+ln([74,80],[74,F],'mach',4)+ln([128,80],[128,F],'mach',4)+ln([64,F-1],[140,F-1],'mach',3)}}};
+var ohpA=S(ext(stand,{t:-3,n:4,H1:[106,32],kb1:1}));
+D['skulderpres']={A:ohpA,B:ext(ohpA,{t:-1,n:6,H1:[100,-15]}),M:{t:-6,n:-16,H1:[107,10]},con:1,lbl:['Pres stangen lodret op forbi ansigtet','Sænk til forsiden af skuldrene'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var dbpA=S({x:88,y:104,t:-3,n:4,H1:[95,58],kb1:-1,A1:[126,139],lb1:-1,p1:95});
+D['håndvægt skulderpres']={A:dbpA,B:ext(dbpA,{H1:[91,16]}),con:1,lbl:['Pres håndvægtene op over hovedet','Sænk til ørehøjde'],trk:'ha1',
+  eq:function(J){return {b:E.padl([75,112],[75,48],7)+rc(64,111,40,6,'pad',2.5)+ln([75,117],[75,F],'mach',3.5)+ln([96,117],[96,F],'mach',3.5)+ln([62,F-1],[106,F-1],'mach',3),f:E.db(J.ha1,6)}}};
+var latA=Fv({x:100,y:72,t:0,ua1:172,fa1:168,A1:[110,139],lb1:1});
+D['sidehævninger']={A:latA,B:ext(latA,{ua1:95,fa1:102}),con:1,lbl:['Løft armene ud til siden til skulderhøjde','Sænk langsomt'],trk:'ha1',
+  eq:function(J){return {f:E.db(J.ha1,5.5)+E.db(J.ha2,5.5)}}};
+var clatA=Fv({x:100,y:72,t:4,ua1:194,fa1:200,H2:[52,64],kb2:1,A1:[111,139],lb1:1,A2:[89,139],lb2:-1});
+D['kabel sidehævninger']={A:clatA,B:ext(clatA,{ua1:96,fa1:100}),con:1,lbl:['Før armen op og ud til skulderhøjde','Sænk langsomt på tværs af kroppen'],trk:'ha1',
+  eq:function(J){return {b:E.tower(44,30)+E.pulley([48,132]),f:E.cable([48,132],J.ha1)+E.handle(J.ha1)}}};
+var tpA=S(ext(stand,{x:94,t:12,n:-10,ua1:172,fa1:25}));
+D['triceps pushdown']={A:tpA,B:ext(tpA,{fa1:172}),con:1,hold:[.35,.6],lbl:['Pres ned til armene er strakte','Lad håndtaget komme op til brysthøjde'],trk:'ha1',
+  eq:function(J){return {b:E.tower(156,-30)+E.pulley([150,-24]),f:E.cable([150,-24],J.ha1)+E.handle(J.ha1)}}};
+var sapA=S(ext(stand,{x:92,t:28,n:-18,ua1:52,fa1:58,A1:[100,139]}));
+D['straight-arm pulldown']={A:sapA,B:ext(sapA,{ua1:178,fa1:176}),con:1,hold:[.35,.6],lbl:['Træk stangen ned til lårene med strakte arme','Før armene op igen til strækket'],trk:'ha1',
+  eq:function(J){return {b:E.tower(160,-30)+E.pulley([154,-24]),f:E.cable([154,-24],J.ha1)+E.barf(add(J.ha1,[-1,0],1),add(J.ha1,[1,0],1),2)}}};
+var oteA=S(ext(stand,{t:-2,n:6,ua1:-8,fa1:-172}));
+D['overhead triceps extension']={A:oteA,B:ext(oteA,{fa1:-8}),con:1,lbl:['Stræk armene op over hovedet','Sænk vægten bag hovedet – albuerne peger op'],trk:'ha1',
+  eq:function(J){return {f:E.db(J.ha1,6.5)}}};
+var skA=S(ext(benchA,{H1:null,ua1:-14,fa1:-14}));delete skA.H1;
+D['skullcrushers']={A:skA,B:ext(skA,{fa1:-142}),con:0,lbl:['Bøj kun i albuen og sænk stangen mod panden','Stræk armene igen'],trk:'ha1',
+  eq:function(J){return {b:E.bench(30,134,106),f:E.plate(J.ha1,9)}}};
+
+var spdA=S({x:96,y:108,t:8,n:-4,ua1:168,fa1:32,A1:[128,139],lb1:-1,p1:95});
+D['siddende skrå triceps pushdown']={A:spdA,B:ext(spdA,{fa1:138}),con:1,hold:[.35,.6],lbl:['Pres stangen skråt ned og frem til armene er strakte','Lad stangen komme op igen – albuerne står stille ved siden'],trk:'ha1',view:'Set fra siden · siddende foran kablet',
+  eq:function(J){return {b:E.tower(178,-30)+E.pulley([172,-24])+rc(70,115,40,6,'pad',2.5)+ln([90,121],[90,F],'mach',3.5)+ln([72,F-1],[108,F-1],'mach',3),
+    f:E.cable([172,-24],J.ha1)+ln(add(J.ha1,[-3,-4],1),add(J.ha1,[3,4],1),'bar',3.2)}}};
+
+/* --- ryg/biceps --- */
+var puFA=Fv({x:100,y:62,t:0,H1:[126,-18],kb1:1,th1:184,sh1:178,thk1:1});
+D['pull-ups']={A:puFA,B:ext(puFA,{y:22}),con:1,hold:[.4,.5],lbl:['Træk brystet op mod stangen','Sænk helt ned til strakte arme'],trk:'head',
+  eq:function(){return {b:ln([20,-18],[180,-18],'bar',3.5)+ln([26,-18],[26,F],'mach',4)+ln([174,-18],[174,F],'mach',4)}}};
+var chA=S({x:101,y:64,t:-2,n:0,H1:[104,-21],th1:184,sh1:212,p1:170});
+D['chin-ups']={A:chA,B:ext(chA,{x:95,y:30,t:-14,n:6,th1:174,sh1:218}),con:1,hold:[.4,.5],lbl:['Træk hagen op over stangen – albuerne ned langs siden','Sænk helt ned til strakte arme'],trk:'head',
+  eq:function(){return {b:ln([40,-34],[40,F],'mach',4.5)+ln([40,-21],[108,-21],'mach',3.5)+ci([104,-21],3,'bar')+ln([30,F-1],[50,F-1],'mach',3)}}};
+var lpdA=Fv({x:100,y:100,t:0,H1:[129,17],kb1:1,K1:[113,106],sh1:180,K2:[87,106],sh2:180});
+D['lat pulldown']={A:lpdA,B:ext(lpdA,{H1:[133,66]}),con:1,hold:[.35,.6],lbl:['Træk stangen ned til øverste del af brystet','Før stangen op til strakte arme'],trk:'ha1',
+  eq:function(J){var c=[(J.ha1[0]+J.ha2[0])/2,(J.ha1[1]+J.ha2[1])/2];
+    return {b:ln([100,-34],[100,F],'mach',4)+ln([84,-34],[116,-34],'mach',4)+E.pulley([100,-28])+rc(78,106,44,6,'pad',2.5)+ln([80,F-1],[120,F-1],'mach',3)+E.cable([100,-28],c),
+      f:E.barf(J.ha1,J.ha2,14)+rc(80,92,40,6,'pad',3)}}};
+var rowA=S({x:88,y:78,t:72,n:-22,H1:[126,112],kb1:-1,A1:[102,139],lb1:-1,p1:95});
+D['vandret roning']={A:rowA,B:ext(rowA,{H1:[112,85]}),con:1,hold:[.35,.6],lbl:['Træk stangen op mod maven','Sænk til strakte arme – ryggen står stille'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var crA=S({x:60,y:114,t:16,n:-6,H1:[116,96],kb1:-1,A1:[126,118],lb1:-1,p1:25});
+D['kabelroning']={A:crA,B:ext(crA,{t:-5,n:5,H1:[84,98]}),con:1,hold:[.35,.6],lbl:['Træk håndtaget ind til maven – skuldrene tilbage','Stræk armene frem uden at runde ryggen'],trk:'ha1',
+  eq:function(J){return {b:rc(34,121,46,6,'pad',2.5)+ln([57,127],[57,F],'mach',3.5)+ln([134,98],[134,F],'mach',4)+ln([30,F-1],[160,F-1],'mach',3)+ln([160,F-1],[160,96],'mach',4)+E.pulley([154,100]),
+    f:E.cable([154,100],J.ha1)+E.handle(J.ha1)}}};
+var lrA=S({x:60,y:114,t:14,n:-6,H1:[116,100],kb1:-1,A1:[126,118],lb1:-1,p1:25});
+D['low row med smalt greb']={A:lrA,B:ext(lrA,{t:-4,n:4,H1:[83,103]}),con:1,hold:[.35,.6],lbl:['Træk håndtaget ind mod navlen – albuerne tæt langs kroppen','Stræk armene frem uden at runde ryggen'],trk:'ha1',view:'Set fra siden · smalt, parallelt greb',
+  eq:function(J){var a=J.ha1,tip=add(a,[7,0],1);
+    return {b:rc(34,121,46,6,'pad',2.5)+ln([57,127],[57,F],'mach',3.5)+ln([134,98],[134,F],'mach',4)+ln([30,F-1],[160,F-1],'mach',3)+ln([160,F-1],[160,96],'mach',4)+E.pulley([154,104]),
+    f:E.cable([154,104],tip)+ln(tip,add(a,[0,-4],1),'bar',2.6)+ln(tip,add(a,[0,4],1),'bar',2.6)+ln(add(a,[0,-5],1),add(a,[0,5],1),'bar',3.2)}}};
+var r1A=S({x:82,y:77,t:86,n:-14,H1:[121,118],kb1:-1,H2:[128,109],kb2:-1,A1:[98,139],lb1:-1,p1:95,K2:[79,111],sh2:268,p2:250});
+D['enarms håndvægtsroning']={A:r1A,B:ext(r1A,{H1:[103,86]}),con:1,hold:[.35,.6],lbl:['Træk håndvægten op mod hoften','Sænk til strakt arm'],trk:'ha1',
+  eq:function(J){return {mid:E.bench(42,142,114),f:E.db(J.ha1,6)}}};
+var fpA=S(ext(stand,{x:98,t:-4,n:4,ua1:78,fa1:78}));
+D['face pulls']={A:fpA,B:ext(fpA,{ua1:-92,uk1:.35,fa1:20}),M:{ua1:86,uk1:.15,fa1:45},con:1,hold:[.35,.7],lbl:['Træk rebet mod ansigtet – albuerne højt og ud','Stræk armene frem igen'],trk:'ha1',
+  eq:function(J){return {b:E.tower(174,-30)+E.pulley([168,20]),f:E.cable([168,20],J.ha1)+E.handle(J.ha1)}}};
+var rdA=Fv({x:100,y:74,t:0,tl:.5,hd:13,ua1:178,fa1:176,A1:[113,139],lb1:1});
+D['bagskulder flyes']={A:rdA,B:ext(rdA,{ua1:96,fa1:100}),con:1,hold:[.35,.6],lbl:['Løft armene ud til siden med let bøjede albuer','Sænk langsomt'],trk:'ha1',view:'Set forfra · overkroppen er foroverbøjet',
+  eq:function(J){return {f:E.db(J.ha1,5.5)+E.db(J.ha2,5.5)}},m:[['Skuldre',1],['Fælder',.5]]};
+var shA=Fv({x:100,y:72,t:0,e:0,H1:[114,82],kb1:1,A1:[110,139],lb1:1});
+D['shrugs']={A:shA,B:ext(shA,{e:7,H1:[114,75]}),con:1,hold:[.35,.8],lbl:['Løft skuldrene op mod ørerne','Sænk helt ned'],trk:'ha1',
+  eq:function(J){return {f:E.bbf(J.ha1,J.ha2,62)}},m:[['Fælder',1]]};
+var cuA=S(ext(stand,{ua1:182,fa1:178}));
+D['biceps curl']={A:cuA,B:ext(cuA,{ua1:174,fa1:22}),con:1,hold:[.35,.6],lbl:['Bøj albuen og curl vægten op','Sænk langsomt til strakt arm'],trk:'ha1',
+  eq:function(J){return {f:E.db(J.ha1,6)}}};
+D['hammer curl']={A:cuA,B:D['biceps curl'].B,con:1,hold:[.35,.6],lbl:['Curl op med tommelfingeren opad','Sænk langsomt'],trk:'ha1',
+  eq:function(J){return {f:E.dbv(J.ha1,J.fa1)}}};
+var pcA=S({x:80,y:104,t:8,n:-8,ua1:140,fa1:146,A1:[110,139],lb1:-1,p1:95});
+D['preacher curl']={A:pcA,B:ext(pcA,{fa1:12}),con:1,lbl:['Curl stangen op – overarmen bliver på puden','Sænk til næsten strakt arm'],trk:'ha1',
+  eq:function(J){var N=nrm(140),p0=add(add(J.sh,N,6.5),dir(140),3),p1=add(p0,dir(140),26);
+    return {mid:E.padl(p0,p1,8)+ln(add(p1,[0,3],1),[p1[0],F],'mach',3.5)+rc(62,111,34,6,'pad',2.5)+ln([79,117],[79,F],'mach',3.5)+ln([60,F-1],[130,F-1],'mach',3),f:E.plate(J.ha1,9)}}};
+D['kabel curl']={A:cuA,B:D['biceps curl'].B,con:1,hold:[.35,.6],lbl:['Curl håndtaget op mod skulderen','Sænk langsomt – kablet holder spændingen'],trk:'ha1',
+  eq:function(J){return {b:E.tower(160,40)+E.pulley([153,134]),f:E.cable([153,134],J.ha1)+E.handle(J.ha1)}}};
+
+var slpA=S({x:100,y:104,t:-10,n:6,H1:[101,19],kb1:1,A1:[136,139],lb1:-1,p1:95});
+D['smal lat pulldown']={A:slpA,B:ext(slpA,{t:-16,n:10,H1:[106,72]}),con:1,hold:[.35,.6],lbl:['Træk håndtagene ned til brystet – albuerne ned langs siden','Før håndtagene op til strakte arme'],trk:'ha1',view:'Set fra siden · smalt, parallelt greb',
+  eq:function(J){var a=J.ha1,top=[a[0],a[1]-8],kp=add(J.kn1,[-6,-9],1);
+    return {b:ln([62,-34],[62,F],'mach',4.5)+ln([62,-30],[a[0]+3,-30],'mach',4)+E.pulley([a[0],-26])+rc(76,111,42,6,'pad',2.5)+ln([90,117],[90,F],'mach',3.5)+ln([54,F-1],[122,F-1],'mach',3)+ln([62,96],[kp[0],96],'mach',3),
+      f:E.cable([a[0],-26],top)+ln(top,add(a,[-4,0],1),'bar',2.6)+ln(top,add(a,[4,0],1),'bar',2.6)+ln(add(a,[-5,0],1),add(a,[5,0],1),'bar',3.2)+rc(kp[0]-10,kp[1]-2,22,6,'pad',3)}}};
+
+/* --- ben --- */
+var sqA=S(ext(stand,{x:98,t:4,n:-4,HT1:[2,-11],kb1:-1,kbf:1,A1:[102,139]}));
+D['squat']={A:sqA,B:ext(sqA,{x:80,y:112,t:42,n:-30}),con:0,lbl:['Sæt dig ned og tilbage til lårene er vandrette','Pres op gennem hele foden'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var fsA=S(ext(stand,{x:99,t:0,ar:1,ua1:84,fa1:-68}));
+D['front squat']={A:fsA,B:ext(fsA,{x:88,y:113,t:22,n:-14}),con:0,lbl:['Gå lodret ned – albuerne højt','Pres op med oprejst overkrop'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var gsA=S(ext(stand,{x:99,t:0,ar:1,ua1:166,fa1:16}));
+D['goblet squat']={A:gsA,B:ext(gsA,{x:89,y:114,t:20,n:-12}),con:0,lbl:['Sæt dig mellem hælene','Pres op med håndvægten tæt på brystet'],trk:'ha1',
+  eq:function(J){return {f:E.dbv(J.ha1,90,7)}}};
+var hsA=S({x:93,y:71,t:-20,n:20,HT1:[-4,9],kb1:-1,A1:[132,124],lb1:-1,p1:68});
+D['hack squat']={A:hsA,B:ext(hsA,{x:105.3,y:104.8}),con:0,lbl:['Sænk slæden kontrolleret','Pres op uden at låse knæene'],trk:'hip',
+  eq:function(J){var N=nrm(-20),u=dir(-20),p0=add(add(J.hip,N,-9),u,-8),p1=add(p0,u,58),r0=add(add([93,71],N,-17),u,-60),r1=add(r0,u,135),fa=[132,124],q0=add(add(fa,dir(68),-9),nrm(68),5),q1=add(add(fa,dir(68),20),nrm(68),5);
+    return {b:ln(r0,r1,'mach',4)+ln(q0,q1,'mach',5)+ln(q1,[q1[0],F],'mach',3.5)+ln(q0,[q0[0],F],'mach',3.5),mid:E.padl(p0,p1,7)}}};
+var lpA=S({x:70,y:112,t:-62,n:24,H1:[78,118],kb1:1,A1:[118,64],lb1:-1,p1:-45});
+D['benpres']={A:lpA,B:ext(lpA,{A1:[101.7,80.3]}),con:0,lbl:['Lad slæden komme ned mod brystet','Pres op uden at låse knæene'],trk:'an1',
+  eq:function(J){var u=dir(45),s=add(J.an1,u,4.5),sa=add(s,dir(-45),-12),sb=add(s,dir(-45),20);
+    return {b:ln([74,122],[174,22],'mach',4)+ln([92,124],[92,F],'mach',4)+E.padl(add(add([70,112],nrm(-62),-9),dir(-62),-6),add(add([70,112],nrm(-62),-9),dir(-62),46),7)+rc(56,118,40,6,'pad',2.5)+ln([40,F-1],[180,F-1],'mach',3)+ln([170,26],[170,F],'mach',4),
+      f:ln(sa,sb,'mach',5)+E.plate(add(s,u,12),11)}}};
+var leA=S({x:84,y:100,t:-6,n:6,H1:[92,108],kb1:1,th1:90,sh1:178,p1:96});
+D['leg extension']={A:leA,B:ext(leA,{sh1:94,p1:10}),con:1,hold:[.35,.7],lbl:['Stræk benene helt ud','Sænk langsomt'],trk:'an1',
+  eq:function(J){var N=nrm(J.sh1),r=add(add(J.an1,dir(J.sh1),-3),N,-7);
+    return {b:E.padl([70,110],[66,56],7)+rc(64,106,56,6,'pad',2.5)+ln([90,112],[90,F],'mach',3.5)+ln([60,F-1],[126,F-1],'mach',3),f:ln([120,98],r,'mach',3)+ci(r,4.6,'pad')}}};
+var lcA=S({x:94,y:100,t:90,n:0,H1:[124,110],kb1:-1,th1:270,sh1:272,p1:180});
+D['leg curl']={A:lcA,B:ext(lcA,{sh1:348,p1:280}),con:1,hold:[.35,.6],lbl:['Curl hælene op mod numsen','Sænk langsomt til strakte ben'],trk:'an1',
+  eq:function(J){var N=nrm(J.sh1),r=add(add(J.an1,dir(J.sh1),-3),N,6.5);
+    return {b:E.bench(62,152,108),f:ln([60,108],r,'mach',3)+ci(r,4.6,'pad')}}};
+var luA=S({x:99,y:78,t:2,n:-2,ua1:180,fa1:180,A1:[126,139],lb1:-1,p1:95,A2:[62,131],lb2:-1,p2:145});
+D['udfald']={A:luA,B:ext(luA,{x:97,y:105}),con:0,lbl:['Sænk det bagerste knæ mod gulvet','Pres op gennem forreste hæl'],trk:'hip',
+  eq:function(J){return {f:E.db(J.ha1,5.5)}}};
+var bsA=S({x:99,y:78,t:3,n:-3,ua1:180,fa1:180,A1:[124,139],lb1:-1,p1:95,A2:[58,104],lb2:-1,p2:250});
+D['bulgarsk split squat']={A:bsA,B:ext(bsA,{x:90,y:106,t:14}),con:0,lbl:['Sænk lodret ned på forreste ben','Pres op gennem forreste hæl'],trk:'hip',
+  eq:function(J){return {b:E.bench(26,68,110),f:E.db(J.ha1,5.5)}}};
+var rdlA=S(ext(stand,{x:98,t:3,ua1:180,fa1:180}));
+D['rumænsk dødløft']={A:rdlA,B:ext(rdlA,{x:70,y:82,t:78,n:-26}),con:0,lbl:['Skub hofterne bagud – stangen glider ned ad benene','Pres hofterne frem og rejs dig'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var dlA=S({x:74,y:101,t:60,n:-36,ua1:180,fa1:180,A1:[102,139],lb1:-1,p1:95});
+D['dødløft']={A:dlA,B:ext(dlA,{x:100,y:73,t:-1,n:1}),con:1,lbl:['Pres gulvet væk og rejs dig med stangen tæt på','Sænk stangen kontrolleret til gulvet'],trk:'ha1',
+  eq:function(J){return {f:E.plate(J.ha1)}}};
+var htA=S({x:88,y:128,t:-54,n:30,HH1:[0,-11],kb1:1,A1:[132,139],lb1:-1,p1:95});
+D['hip thrust']={A:htA,B:ext(htA,{x:93,y:102,t:-92,n:4}),con:1,hold:[.35,.8],lbl:['Pres hoften op til kroppen er vandret','Sænk hoften mod gulvet'],trk:'hip',
+  eq:function(J){return {b:E.bench(6,60,106),f:E.plate(add(J.hip,[1,-10],1),12)}}};
+var cfA=S({x:106,y:65.4,t:0,n:0,ua1:155,fa1:0,th1:180,sh1:180,p1:70});
+D['lægpres']={A:cfA,B:ext(cfA,{x:107.4,y:53.5,p1:125}),con:1,hold:[.35,.7],lbl:['Gå helt op på tæerne','Sænk hælene under trinnet'],trk:'an1',
+  eq:function(J){return {b:ln([72,-20],[72,F],'mach',4.5)+ln([72,J.sh[1]-6],[J.sh[0],J.sh[1]-6],'mach',4)+ln([60,F-1],[84,F-1],'mach',3),mid:rc(112,128,24,14,'stack',2),f:rc(J.sh[0]-8,J.sh[1]-10,16,6,'pad',3)}}};
+var scA=S({x:78,y:98,t:-2,n:4,HK1:[-2,-13],kb1:1,A1:[124.8,132.4],lb1:-1,p1:70});
+D['siddende lægpres']={A:scA,B:ext(scA,{A1:[126.4,120.5],p1:125}),con:1,hold:[.35,.7],lbl:['Pres knæene op med forfoden','Sænk hælene helt ned'],trk:'an1',
+  eq:function(J){return {b:rc(56,105,46,6,'pad',2.5)+ln([78,111],[78,F],'mach',3.5)+rc(130,128,20,14,'stack',2)+ln([50,F-1],[106,F-1],'mach',3),
+    f:rc(J.kn1[0]-12,J.kn1[1]-14,24,6,'pad',3)+ln([J.kn1[0]+12,J.kn1[1]-11],[150,J.kn1[1]-11],'mach',3)}}};
+
+/* --- mave --- */
+var crnA=S({x:90,y:133,t:-90,n:0,HT1:[11,6],kb1:1,A1:[128,139],lb1:-1,p1:95});
+D['crunches']={A:crnA,B:ext(crnA,{t:-58,n:-12}),con:1,hold:[.35,.7],lbl:['Rul skuldrene op fra gulvet','Rul langsomt ned igen'],trk:'sh',
+  eq:function(){return {b:rc(14,140,150,2.5,'pad',1)}}};
+var kcA=S({x:92,y:102,t:18,n:-6,HT1:[9,5],kb1:1,K1:[96,135],sh1:270,p1:250});
+D['kabel crunch']={A:kcA,B:ext(kcA,{t:90,n:-10}),con:1,hold:[.35,.7],lbl:['Krum ryggen og før albuerne mod knæene','Rul langsomt op igen – hoften står stille'],trk:'head',
+  eq:function(J){var c=add(J.ha1,[0,0],1);return {b:E.tower(168,-30)+E.pulley([162,-24]),f:E.cable([162,-24],c)+E.handle(c)}}};
+var suA=S({x:110,y:91,t:-107,n:0,HT1:[-14,6],kb1:-1,th1:50,sh1:150,p1:60});
+D['sit-ups på skråbænk']={A:suA,B:ext(suA,{t:8,n:-8}),con:1,lbl:['Rul op til overkroppen er lodret','Sænk langsomt tilbage'],trk:'head',
+  eq:function(J){var a=J.an1;return {b:E.padl([28,122],[146,86],8)+ln([40,122],[40,F],'mach',3.5)+ln([134,92],[134,F],'mach',3.5)+ln([150,96],[150,F],'mach',3.5)+ci([a[0]+5,a[1]-6],4.6,'pad')+ci([a[0]-3,a[1]+7],4.6,'pad')+ln([20,F-1],[160,F-1],'mach',3)}}};
+var hlA=S({x:100,y:64,t:0,n:0,H1:[102,-22],kb1:-1,th1:181,sh1:179,p1:160});
+D['hængende benløft']={A:hlA,B:ext(hlA,{x:104,t:-12,th1:94,sh1:92,p1:80}),con:1,hold:[.35,.6],lbl:['Løft benene til vandret uden at svinge','Sænk langsomt'],trk:'an1',
+  eq:function(){return {b:ln([40,-34],[40,F],'mach',4.5)+ln([40,-22],[106,-22],'mach',3.5)+ci([102,-22],3,'bar')+ln([30,F-1],[50,F-1],'mach',3)}}};
+var awA=S({x:68,y:102,hipK:[66,136,3.4],t:69.5,n:-30,HF1:[136,47.4],kb1:-1,K1:[66,136],sh1:268,p1:250});
+D['ab wheel']={A:awA,B:ext(awA,{x:96,y:122,hipK:[66,136,65],t:86,n:-6}),con:0,lbl:['Rul hjulet frem med spændt mave','Rul tilbage til hænderne er under skuldrene'],trk:'ha1',
+  eq:function(J){return {f:ci([J.ha1[0],136],6,'pl solid')+ci([J.ha1[0],136],2,'plh')}}};
+var amA=S({x:84,y:100,t:0,n:0,HT1:[-1,9],kb1:1,A1:[114,136],lb1:-1,p1:95});
+D['ab crunch maskine']={A:amA,B:ext(amA,{t:38,n:-10}),con:1,hold:[.35,.7],lbl:['Krum overkroppen frem mod knæene','Rul langsomt tilbage'],trk:'head',
+  eq:function(J){var N=nrm(J.P.t),pad=add(add(J.sh,dir(J.P.t),-6),N,9);
+    return {b:E.padl([70,110],[66,60],7)+rc(60,106,48,6,'pad',2.5)+ln([84,112],[84,F],'mach',3.5)+ln([56,F-1],[124,F-1],'mach',3)+ci([118,128],4.6,'pad'),f:ln([82,96],pad,'mach',3)+ci(pad,5,'pad')}}};
+var pfA=S(ext(stand,{x:98,H1:[110,52],kb1:-1,ua1:null}));
+D['pallof press']={A:pfA,B:ext(pfA,{H1:[143,52]}),con:1,hold:[.35,1],lbl:['Pres håndtaget lige frem – lad ikke kroppen dreje','Før håndtaget tilbage til brystet'],trk:'ha1',view:'Set fra siden · kablet trækker ind fra siden',
+  eq:function(J){return {b:'<g class="far">'+E.tower(52,-10)+E.pulley([58,50])+'</g>',f:E.cable([58,50],J.ha1)+E.handle(J.ha1)}},m:[['Skrå',1],['Mave',.5]]};
+var wcA=Fv({x:100,y:76,fs:1,t:12,H1:[140,10],kb1:1,H2:[134,13],kb2:-1,A1:[124,139],lb1:1,A2:[78,139],lb2:-1});
+D['kabel woodchop']={A:wcA,B:ext(wcA,{t:-12,H1:[80,80],H2:[84,78],kb1:-1,kb2:-1}),M:{t:0,H1:[106,56],H2:[100,56]},con:1,hold:[.35,.6],lbl:['Træk diagonalt ned over kroppen og drej','Før kablet tilbage op'],trk:'ha1',
+  eq:function(J){var c=[(J.ha1[0]+J.ha2[0])/2,(J.ha1[1]+J.ha2[1])/2];return {b:E.tower(186,-30)+E.pulley([180,-8]),f:E.cable([180,-8],c)+E.handle(c)}},m:[['Skrå',1],['Mave',.5]]};
+
+/* ikonnøgle -> standardanimation, når navnet ikke har sin egen */
+var BYKEY={bench:'bænkpres',incline:'skråbænkpres',ohp:'skulderpres',lateral:'sidehævninger',pushdown:'triceps pushdown',dips:'dips',
+  pullup:'pull-ups',row:'vandret roning',facepull:'face pulls',curl:'biceps curl',squat:'squat',rdl:'rumænsk dødløft',deadlift:'dødløft',
+  legpress:'benpres',lunge:'udfald',calf:'lægpres',pushup:'armstrækninger',fly:'kabelflyes',overheadext:'overhead triceps extension',
+  skull:'skullcrushers',legext:'leg extension',legcurl:'leg curl',hipthrust:'hip thrust',crunch:'crunches',legraise:'hængende benløft',
+  reardelt:'bagskulder flyes',shrug:'shrugs',abwheel:'ab wheel',abmachine:'ab crunch maskine',pallof:'pallof press',woodchop:'kabel woodchop'};
+
+/* ---------- interpolation ---------- */
+function lerp(a,b,t){
+  var o={};
+  for(var k in a){
+    var x=a[k],y=b[k];
+    if(typeof x==='number'&&typeof y==='number') o[k]=x+(y-x)*t;
+    else if(x&&y&&x.length&&x.length===y.length&&typeof x[0]==='number') o[k]=x.map(function(v,i){return v+(y[i]-v)*t});
+    else o[k]=x;
+  }
+  for(k in b) if(!(k in o)) o[k]=b[k];
+  return o;
+}
+function clean(P){var o={};for(var k in P) if(P[k]!=null) o[k]=P[k];return o}
+function pose(def,t){
+  var A=clean(def.A),B=clean(def.B);
+  if(!def.M) return lerp(A,B,t);
+  for(var k in def.M){if(A[k]==null)A[k]=/^(uk|fk|hsz|thk|tl)/.test(k)?1:0;if(B[k]==null)B[k]=A[k]}
+  var M=clean(lerp(A,B,.5));for(k in def.M) M[k]=def.M[k];
+  return t<.5?lerp(A,M,t*2):lerp(M,B,t*2-1);
+}
+function frame(def,t,list,op){
+  var P=pose(def,t),J=solve(P),ex=def.eq?def.eq(J):{};
+  J.eqMid=ex.mid||'';
+  var body=P.v==='f'?bodyFront(J,list,op):bodySide(J,list,op);
+  return {J:J,svg:(ex.b||'')+body+(ex.f||'')};
+}
+function ghost(def,t){
+  var P=pose(def,t),J=solve(P);J.eqMid='';
+  return '<g class="ghost">'+(P.v==='f'?bodyFront(J,[],0,1):bodySide(J,[],0,1))+'</g>';
+}
+function trackPt(J,k){return k==='head'?J.head:k==='sh'?(J.s1?J.nb:J.sh):k==='hip'?J.hip:J[k]}
+function path(def){
+  var pts=[];for(var i=0;i<=24;i++){var P=pose(def,i/24);pts.push(trackPt(solve(P),def.trk||'ha1'))}
+  return '<path class="trk" d="M'+pts.map(P2).join('L')+'"/>';
+}
+function find(name,key){return D[name.toLowerCase()]||D[BYKEY[key]]||null}
+function muscleList(def,m){
+  if(def.m) return def.m;
+  var o=[];Object.keys(m||{}).forEach(function(k){o.push([k,m[k]>=1?1:.5])});return o;
+}
+return {D:D,find:find,frame:frame,ghost:ghost,path:path,trackPt:trackPt,muscleList:muscleList,lerp:lerp,solve:solve,clean:clean,pose:pose};
+})();
+
+/* Afspiller til øvelsespanelet: figur, tempo-tidslinje, åndedræt, gentagelser og forklaring. */
+var ICO_PLAY='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13l11-6.5z"/></svg>';
+var ICO_PAUSE='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3.5h3.6v13H5zM11.4 3.5H15v13h-3.6z"/></svg>';
+function animPlayer(ex,key){
+  var def=ANIM.find(ex,key);
+  if(!def){var box=h('div',{class:'exico big','aria-hidden':'true'});startAnim(box,key);return box}
+  var c=BYNAME[ex.toLowerCase()],list=ANIM.muscleList(def,c?c[4]:{});
+  var con=!!def.con,hold=def.hold||[.35,.4];
+  var segs=[
+    {d:con?1:2,mv:1,c:con,l:def.lbl[0]},
+    {d:hold[1],l:'Hold stillingen'},
+    {d:con?2:1,mv:-1,c:!con,l:def.lbl[1]},
+    {d:hold[0],l:'Kort pause'}
+  ];
+  var total=segs.reduce(function(s,x){return s+x.d},0);
+  var side=ANIM.clean(def.A).v!=='f';
+  var view=def.view||(side?'Set fra siden':'Set forfra');
+  var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(err){}
+  var playing=!reduce,speed=1,el=0,last=0,shown=-1,repShown=-1;
+  var stage=h('div',{class:'anim-stage'});
+  var trk=ANIM.path(def);
+  var btn=h('button',{class:'anim-btn',type:'button'});
+  var phB=h('b'),phS=h('span');
+  var rep=h('span',{class:'anim-rep'});
+  var spd=h('button',{class:'anim-spd',type:'button','aria-label':'Skift hastighed'},'1×');
+  var tl=h('div',{class:'anim-tl','aria-hidden':'true'}),mk=h('span',{class:'mk'});
+  var segEls=segs.map(function(s){
+    var t=s.mv?(s.c?'Kraft · '+s.d+' s':'Kontrol · '+s.d+' s'):'Pause';
+    var e=h('span',{class:'sg'+(s.mv?'':' ps'),style:'flex:'+s.d+' 1 0',text:s.mv?t:''});
+    tl.append(e);return e;
+  });
+  tl.append(mk);
+  function setBtn(){btn.innerHTML=playing?ICO_PAUSE:ICO_PLAY;btn.setAttribute('aria-label',playing?'Sæt animationen på pause':'Afspil animationen')}
+  function draw(){
+    var tc=el%total,rp=Math.floor(el/total)+1,i=0,acc=0;
+    while(i<3&&tc>acc+segs[i].d){acc+=segs[i].d;i++}
+    var s=segs[i],u=Math.min(1,(tc-acc)/s.d),e=(1-Math.cos(Math.PI*u))/2,t,op,gt;
+    if(i===0){t=e;gt=1}else if(i===1){t=1;gt=0}else if(i===2){t=1-e;gt=0}else{t=0;gt=1}
+    if(s.mv&&s.c) op=.55+.45*Math.sin(Math.PI*u);
+    else if(i===1) op=con?.85:.55; else if(i===3) op=con?.55:.85; else op=.55;
+    var fr=ANIM.frame(def,t,list,op);
+    stage.firstChild.innerHTML='<path class="flr" d="M2 142.8H198"/>'+ANIM.ghost(def,gt)+trk+fr.svg;
+    if(i!==shown){
+      shown=i;phB.textContent=s.l;
+      phS.textContent=s.mv?(s.c?'Pust ud · '+(s.d)+' sek.':'Træk vejret ind · '+s.d+' sek.'):'';
+      segEls.forEach(function(x,k){x.classList.toggle('on',k===i)});
+    }
+    if(rp!==repShown){repShown=rp;rep.textContent='Gent. '+((rp-1)%12+1)}
+    mk.style.left='calc('+(tc/total*100).toFixed(2)+'% - 1px)';
+  }
+  var fitted=false;
+  function fit(){
+    var svg=stage.firstChild;fitted=true;
+    try{
+      svg.innerHTML=ANIM.frame(def,0,list,1).svg+ANIM.frame(def,1,list,1).svg;
+      var bb=svg.getBBox(),y0=Math.min(48,Math.max(-40,Math.floor(bb.y-8)));
+      svg.setAttribute('viewBox','0 '+y0+' 200 '+(148-y0));
+    }catch(err){}
+    shown=-1;draw();
+  }
+  function loop(now){
+    if(!document.contains(stage)) return;
+    if(!fitted) fit();
+    if(playing){if(last) el+=Math.min(.1,(now-last)/1000)*speed;last=now}
+    draw();
+    SHEET.raf=requestAnimationFrame(loop);
+  }
+  btn.onclick=function(){playing=!playing;last=0;setBtn()};
+  spd.onclick=function(){speed=speed===1?.5:1;spd.textContent=speed===1?'1×':'½×'};
+  stage.innerHTML='<svg class="anim-svg" viewBox="0 -40 200 186" role="img" aria-label="'+ex+', '+view.toLowerCase()+'"></svg>';
+  setBtn();draw();
+  SHEET.raf=requestAnimationFrame(loop);
+  var musc=list.some(function(m){return m[1]<1});
+  return h('div',{class:'anim'},
+    stage,
+    h('div',{class:'anim-ctl'},btn,h('div',{class:'anim-now','aria-live':'off'},phB,phS),rep,spd),
+    tl,
+    h('div',{class:'anim-leg'},
+      h('span',{},h('i',{class:'k1'}),'Arbejdende muskel'),
+      musc?h('span',{},h('i',{class:'k2'}),'Hjælpemuskel'):null,
+      h('span',{},h('i',{class:'k3'}),'Bane'),
+      h('span',{},h('i',{class:'k4'}),'Vendepunkt'),
+      h('span',{class:'v',text:view})));
 }
 
 /* ---------- øvelsespanel: animation, vejledning, byt og tilføj ---------- */
@@ -1105,8 +2036,7 @@ function openSheet(ex,ctx){
   var act=ctx&&S.activeId?S.sessions[S.activeId]:null;
   var entry=act&&act.entries[ctx.ei]&&act.entries[ctx.ei].ex===ex?act.entries[ctx.ei]:null;
   var closeBtn=h('button',{class:'btn ghost sm',type:'button',onclick:closeSheet},'Luk');
-  var anim=h('div',{class:'exico big','aria-hidden':'true'});
-  startAnim(anim,picKey(ex));
+  var anim=animPlayer(ex,picKey(ex));
   var panel=h('div',{class:'panel',role:'dialog','aria-modal':'true','aria-labelledby':'sh-title'},
     h('div',{class:'sh-head'},h('h2',{id:'sh-title',text:ex}),closeBtn),
     anim,
@@ -1162,30 +2092,32 @@ function promote(act,e){
   return act.entries.indexOf(e)!==before;
 }
 function setRow(act,e,ei,s,si){
-  var row=h('div',{class:'set'+(s.done?' done':'')});
+  var row=h('div',{class:'set'+(s.done?' done':'')+(s.warm?' warm':'')});
+  var no=s.warm?'O':e.sets.slice(0,si).filter(function(x){return !x.warm}).length+1;
+  var nm=s.warm?'opvarmingssæt':'sæt '+no;
   var kg=h('input',{id:'kg-'+ei+'-'+si,type:'number',inputmode:'decimal',step:'0.5',min:'0',placeholder:'kg',
-    value:s.kg==null?'':s.kg,'aria-label':e.ex+', sæt '+(si+1)+', kilo',
+    value:s.kg==null?'':s.kg,'aria-label':e.ex+', '+nm+', kilo',
     oninput:function(ev){var v=ev.target.value;s.kg=v===''?null:Number(v);save(S.activeId)}});
   var reps=h('input',{id:'re-'+ei+'-'+si,type:'number',inputmode:'numeric',step:'1',min:'0',placeholder:profile(e.ex).lo+'–'+profile(e.ex).hi,
-    value:s.reps==null?'':s.reps,'aria-label':e.ex+', sæt '+(si+1)+', gentagelser',
+    value:s.reps==null?'':s.reps,'aria-label':e.ex+', '+nm+', gentagelser',
     oninput:function(ev){var v=ev.target.value;s.reps=v===''?null:Number(v);save(S.activeId)}});
-  var chk=h('button',{class:'chk',type:'button','aria-pressed':String(!!s.done),'aria-label':'Afslut sæt '+(si+1),
+  var chk=h('button',{class:'chk',type:'button','aria-pressed':String(!!s.done),'aria-label':'Afslut '+nm,
     onclick:function(){
       if(!s.done&&!(s.reps>0)){reps.focus();return}
       s.done=!s.done;
-      if(s.done&&S.plan.autoRest) startTimer(S.plan.restSec);
+      if(s.done&&S.plan.autoRest) startTimer(s.warm?Math.min(60,S.plan.restSec):S.plan.restSec);
       var moved=promote(act,e);
       save(S.activeId); render();
       if(moved) window.scrollTo(0,0);
     }});
   chk.innerHTML=CHECK;
-  row.append(h('span',{class:'no',text:si+1}),kg,reps,chk);
+  row.append(h('span',{class:'no',text:no,title:s.warm?'Opvarmingssæt – tæller ikke med':null}),kg,reps,chk);
   return row;
 }
 function finish(act){
   var id=S.activeId;
   act.entries.forEach(function(e){e.sets=e.sets.filter(function(s){return s.done&&s.reps>0})});
-  act.entries=act.entries.filter(function(e){return e.sets.length});
+  act.entries=act.entries.filter(function(e){return doneSets(e).length});
   act.done=true; act.finishedAt=Date.now();
   S.activeId=null; save(id);
   var pr=prMap()[id];
@@ -1212,6 +2144,10 @@ function viewPlan(){
     week.append(h('div',{class:'day'},h('span',{},h('b',{text:d}),i===todayI&&h('span',{class:'tag',text:'I dag'})),sel));
   });
   root.append(week);
+  root.append(h('label',{class:'checkrow',for:'warmup'},
+    h('input',{id:'warmup',type:'checkbox',checked:S.plan.warmup!==false,onchange:function(ev){S.plan.warmup=ev.target.checked;planTouched()}}),
+    h('span',{},'Opvarmingssæt først på hver øvelse',h('span',{class:'muted small',style:'display:block',text:'Ca. halv vægt. Tæller ikke med i sæt, rekorder eller vægtforslag.'}))));
+  add(root,focusBlock());
   var sec=h('section',{class:'stack-s'},h('h3',{class:'label',text:'Pas'}));
   S.plan.templates.forEach(function(t){sec.append(templateCard(t))});
   sec.append(h('button',{class:'btn ghost',type:'button',onclick:function(){
@@ -1291,11 +2227,23 @@ function templateCard(t){
   card.append(h('input',{id:'tn-'+t.id,class:'nm',value:t.name,'aria-label':'Navn på pas',
     oninput:function(ev){t.name=ev.target.value;planTouched()},
     onchange:function(){render()}}));
+  var fl=focusLive(),fw=fl?(fl.week===iso(mondayOf(new Date()))?'denne uge':'uge '+isoWeek(parseD(fl.week))):'';
+  function fitem(type,x){return fl?fl.items.filter(function(i){return i.tid===t.id&&i.type===type&&i.ex===x&&!i.off})[0]:null}
+  function nxText(x){var sg=suggest(x);return {t:sg.kind==='new'?'Ny · '+sg.p.lo+'–'+sg.p.hi+' gentagelser':'Næste: '+sugText(sg).main+(sg.kind==='up'?' ↑':sg.kind==='deload'?' ↓':''),up:sg.kind==='up'}}
   t.exercises.forEach(function(x,i){
-    var sg=suggest(x),nx=sg.kind==='new'?'Ny · '+sg.p.lo+'–'+sg.p.hi+' gentagelser':'Næste: '+sugText(sg).main+(sg.kind==='up'?' ↑':sg.kind==='deload'?' ↓':'');
-    card.append(h('div',{class:'ex-row'},h('span',{class:'ex-id'},h('button',{class:'ico-btn',type:'button','aria-label':'Vejledning til '+x,onclick:function(){openSheet(x,null)}},exIcon(x,true)),
-      h('span',{},h('span',{class:'nx-name',text:x}),h('span',{class:'nx'+(sg.kind==='up'?' up':''),text:nx}))),
-      h('button',{class:'x',type:'button','aria-label':'Fjern '+x,onclick:function(){t.exercises.splice(i,1);planTouched();render()}},'×')));
+    var nx=nxText(x),dr=fitem('drop',x),st=fitem('sets',x);
+    var info=dr?'Pause '+fw:nx.t+(st?' · +'+st.n+' sæt '+fw:'');
+    card.append(h('div',{class:'ex-row'+(dr?' drop':'')},h('span',{class:'ex-id'},h('button',{class:'ico-btn',type:'button','aria-label':'Vejledning til '+x,onclick:function(){openSheet(x,null)}},exIcon(x,true)),
+      h('span',{},h('span',{class:'nx-name'},(dr||st)&&h('span',{class:'ftag',text:'Fokus'}),x),h('span',{class:'nx'+(nx.up&&!dr?' up':''),text:info}))),
+      dr?h('button',{class:'btn ghost sm',type:'button',onclick:function(){dr.off=true;planTouched();render()}},'Tag med')
+        :h('button',{class:'x',type:'button','aria-label':'Fjern '+x,onclick:function(){t.exercises.splice(i,1);planTouched();render()}},'×')));
+  });
+  if(fl) fl.items.forEach(function(it){
+    if(it.type!=='add'||it.tid!==t.id||it.off) return;
+    var nx=nxText(it.ex);
+    card.append(h('div',{class:'ex-row fadd'},h('span',{class:'ex-id'},h('button',{class:'ico-btn',type:'button','aria-label':'Vejledning til '+it.ex,onclick:function(){openSheet(it.ex,null)}},exIcon(it.ex,true)),
+      h('span',{},h('span',{class:'nx-name'},h('span',{class:'ftag',text:'Fokus'}),it.ex),h('span',{class:'nx',text:it.n+' sæt '+fw+' · '+nx.t}))),
+      h('button',{class:'x',type:'button','aria-label':'Fjern '+it.ex+' fra fokus',onclick:function(){it.off=true;planTouched();render()}},'×')));
   });
   card.append(picker('ta-'+t.id,'Vælg øvelse til '+t.name,function(name){
     t.exercises.push(name); planTouched(); render();
